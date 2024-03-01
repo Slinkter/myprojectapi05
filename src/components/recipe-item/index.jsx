@@ -16,9 +16,9 @@ const RecipeItem = ({ item }) => {
         </h3>
         <Link
           to={`/recipes-item/${item?.id}`}
-          className="text-sm p-3 mt-5 px-8   rounded-lg uppercase font-medium tracking-wider inline bg-black text-white"
+          className="text-sm p-3 mt-5 px-8   rounded-lg uppercase font-medium tracking-wider inline-block shadow-md bg-black text-white"
         >
-          Recibe Details 6:23:38
+          Recibe Details
         </Link>
       </div>
     </div>
