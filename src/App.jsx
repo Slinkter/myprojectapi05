@@ -5,37 +5,38 @@ import CardUser from "./components/CardUser";
 
 const App = () => {
     const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(false);
-    //
+    const [error, setError] = useState(null);
+    const [userData, setUserData] = useState(null);
     const [userName, setUserName] = useState("slinkter");
     const [searchText, setSearchText] = useState("");
-    const [userData, setUserData] = useState(null);
 
     const getData = useCallback(async () => {
         try {
             setLoading(true);
+            setError(null); // Reset the error before fetching
             const url = `https://api.github.com/users/${userName}`;
             const res = await fetch(url);
             const data = await res.json();
+
             if (res.status === 403) {
-                throw "API rate limit exceeded";
+                throw new Error("API rate limit exceeded");
             }
             if (res.status !== 200) {
-                throw "error  no es 200 ";
+                throw new Error("Error: status is not 200");
             }
+
             setUserData(data);
         } catch (error) {
             setError(error.message);
-            console.log(error);
         } finally {
             setLoading(false);
-            searchText("");
+            setSearchText("");
         }
     }, [userName]);
 
     const btnSearch = useCallback(() => {
-        if (searchText.length <= 0 && searchText.trim() === "") {
-            alert("nombre vacio");
+        if (searchText.trim() === "") {
+            alert("Nombre vacío");
             return;
         }
         setUserName(searchText);
@@ -51,40 +52,44 @@ const App = () => {
     );
 
     return (
-        <div className="min-h-dvh flex flex-col justify-center  items-center ">
+        <div className="min-h-dvh w-full flex flex-col justify-center items-center">
+            <div className="relative flex w-full max-w-[24rem]">
+                <Input
+                    type="text"
+                    label="Username"
+                    value={searchText}
+                    onChange={(e) => setSearchText(e.target.value)}
+                />
+                <Button
+                    className="!absolute right-1 top-1 rounded"
+                    size="sm"
+                    onClick={btnSearch}
+                >
+                    Search
+                </Button>
+            </div>
             {loading && <Spinner color="red" className="h-12 w-12" />}
-            {error && <ErroShow error={error} />}
+
             {userNotFound && <span>No se encontró el usuario</span>}
             {!loading && !error && (
                 <div>
-                    <div className="relative flex w-full max-w-[24rem]">
-                        <Input
-                            type="email"
-                            label="username"
-                            value={searchText}
-                            onChange={(e) => setSearchText(e.target.value)}
-                        />
-                        <Button
-                            className="!absolute right-1 top-1 rounded"
-                            size="sm"
-                            onClick={btnSearch}
-                        >
-                            Search
-                        </Button>
-                    </div>
                     <CardUser data={userData} />
                 </div>
             )}
+            {error && <ErroShow error={error} />}
         </div>
     );
 };
 
 export default App;
 
-const ErroShow = (error) => {
-    <div>
-        <Typography variant="h2" className="mb-2">
-            Error : {error}
+// Componente ErroShow corregido
+const ErroShow = ({ error }) => {
+    return (
+        <div>
+            <Typography variant="h2" className="mb-2">
+                Error: {error}
+            </Typography>
             {error === "API rate limit exceeded" && (
                 <div>
                     <p>
@@ -94,6 +99,6 @@ const ErroShow = (error) => {
                     </p>
                 </div>
             )}
-        </Typography>
-    </div>;
+        </div>
+    );
 };
