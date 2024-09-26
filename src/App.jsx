@@ -12,6 +12,7 @@ import { Input } from "@material-tailwind/react";
 import CardUser from "./components/CardUser";
 
 const App = () => {
+    window.document.title = "my-projectapi-05";
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const [userData, setUserData] = useState(null);
