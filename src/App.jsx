@@ -59,17 +59,27 @@ const App = () => {
 
     return (
         <div className="min-h-dvh w-full flex flex-col justify-center items-center">
-            <div className="relative flex w-full max-w-[24rem]">
+            <div>
+                <Typography variant="h2" className="mb-2">
+                    GitHub API + React + Tailwind CSS
+                </Typography>
+            </div>
+            <div
+                className="relative flex w-full max-w-[24rem]"
+                disabled={error === "API rate limit exceeded" ? true : false}
+            >
                 <Input
                     type="text"
                     label="Username"
                     value={searchText}
+                    disabled={error}
                     onChange={(e) => setSearchText(e.target.value)}
                 />
                 <Button
                     className="!absolute right-1 top-1 rounded"
                     size="sm"
                     onClick={btnSearch}
+                    disabled={error}
                 >
                     Search
                 </Button>
