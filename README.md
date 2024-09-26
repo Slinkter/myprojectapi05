@@ -26,4 +26,4 @@ npm run deploy
 
 ##
 
-![alt text](./api05.png)
+![alt text](./api05.jpeg)
