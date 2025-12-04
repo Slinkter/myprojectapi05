@@ -1,156 +1,162 @@
-import React, { useCallback, useEffect, useMemo, useState } from "react";
-import {
-    Avatar,
-    Button,
-    Card,
-    CardBody,
-    CardHeader,
-    Spinner,
-    Typography,
-} from "@material-tailwind/react";
-import { Input } from "@material-tailwind/react";
-import CardUser from "./components/CardUser";
+import React, { useEffect } from "react";
+import { Spinner, Typography } from "@material-tailwind/react";
+import { useGithubUser } from "./features/user-search/hooks/useGithubUser";
+import SearchBar from "./features/user-search/components/SearchBar";
+import UserCard from "./features/user-search/components/UserCard";
+import ErrorDisplay from "./features/user-search/components/ErrorDisplay";
+
+
+
+const GithubIcon = (props) => (
+
+    <svg {...props} viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
+
+        <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8Z"></path>
+
+    </svg>
+
+);
+
+
 
 const App = () => {
-    window.document.title = "my-projectapi-05";
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(null);
-    const [userData, setUserData] = useState(null);
-    const [userName, setUserName] = useState("slinkter");
-    const [searchText, setSearchText] = useState("");
 
-    const getData = useCallback(async () => {
-        try {
-            setLoading(true);
-            setError(null); // Reset the error before fetching
-            const url = `https://api.github.com/users/${userName}`;
-            const res = await fetch(url);
-            if (res.status === 403) {
-                throw new Error("API rate limit exceeded");
-            }
-            if (res.status !== 200) {
-                throw new Error("Error: status is not 200");
-            }
-            const data = await res.json();
-            setUserData(data);
-        } catch (error) {
-            setError(error.message);
-        } finally {
-            setLoading(false);
-            setSearchText("");
-        }
-    }, [userName]);
+    const { user, isLoading, error, searchUser } = useGithubUser();
 
-    const btnSearch = useCallback(() => {
-        if (searchText.trim() === "") {
-            alert("Nombre vacío");
-            return;
-        }
-        setUserName(searchText);
-    }, [searchText]);
+
+
+    // Cargar un usuario por defecto al iniciar la aplicación
 
     useEffect(() => {
-        getData();
-    }, [userName, getData]);
 
-    const userNotFound = useMemo(
-        () => !userData && !loading && !error,
-        [userData, loading, error]
-    );
+        searchUser("slinkter");
+
+    }, []); // searchUser es estable gracias a useCallback, no necesita ser dependencia
+
+
 
     return (
-        <div className="min-h-dvh w-full flex flex-col justify-center items-center">
-            <div>
-                <Typography variant="h2" className="mb-2">
-                    GitHub API + React + Tailwind CSS
-                </Typography>
-            </div>
-            <div
-                className="relative flex w-full max-w-[24rem]"
-                disabled={error === "API rate limit exceeded" ? true : false}
-            >
-                <Input
-                    type="text"
-                    label="Username"
-                    value={searchText}
-                    disabled={error}
-                    onChange={(e) => setSearchText(e.target.value)}
-                />
-                <Button
-                    className="!absolute right-1 top-1 rounded"
-                    size="sm"
-                    onClick={btnSearch}
-                    disabled={error}
-                >
-                    Search
-                </Button>
-            </div>
-            {loading && <Spinner color="red" className="h-12 w-12" />}
 
-            {userNotFound && <span>No se encontró el usuario</span>}
-            {!loading && !error && (
-                <div>
-                    <CardUser data={userData} />
+        <div className="min-h-dvh w-full bg-gradient-to-br from-gray-100 to-blue-100 dark:from-gray-900 dark:to-blue-900/50 flex flex-col justify-center items-center p-4 antialiased">
+
+            <header className="text-center mb-8">
+
+                <div className="flex justify-center items-center gap-3">
+
+                    <GithubIcon className="w-8 h-8 text-gray-800 dark:text-gray-200" />
+
+                    <Typography
+
+                        variant="h2"
+
+                        color="blue-gray"
+
+                        className="font-bold tracking-tight dark:text-gray-100"
+
+                    >
+
+                        GitHub Explorer
+
+                    </Typography>
+
                 </div>
-            )}
-            {error && <ErroShow error={error} />}
-        </div>
-    );
-};
+
+                <Typography variant="paragraph" className="mt-2 text-lg font-normal text-gray-600 dark:text-gray-400">
+
+                    Encuentra perfiles de desarrolladores de todo el mundo.
+
+                </Typography>
+
+            </header>
+
+
+
+            <main className="w-full max-w-sm">
+
+
+
+                            <SearchBar
+
+
+
+                                onSearch={searchUser}
+
+
+
+                                isLoading={isLoading}
+
+
+
+                                hasError={!!error}
+
+
+
+                            />
+
+
+
+            
+
+
+
+                            <div className="mt-8 min-h-[400px] flex justify-center items-center">
+
+
+
+                                {isLoading && (
+
+
+
+                                    <div className="flex justify-center pt-10">
+
+
+
+                                        <Spinner color="blue" className="h-12 w-12" />
+
+
+
+                                    </div>
+
+
+
+                                )}
+
+
+
+            
+
+
+
+                                {error && <ErrorDisplay error={error} />}
+
+
+
+            
+
+
+
+                                {!isLoading && !error && user && <UserCard user={user} />}
+
+
+
+                            </div>
+
+
+
+                        </main>
+
+
+
+                    </div>
+
+
+
+                );
+
+
+
+            };
+
+
 
 export default App;
-
-// Componente ErroShow corregido
-const ErroShow = ({ error }) => {
-    return (
-        <>
-            <Card
-                className="mt-6 w-96 shadow-xl border-2 border-gray-400"
-                color=""
-                variant="gradient"
-            >
-                <CardHeader floated={false} shadow={false} color="transparent">
-                    <div className="flex gap-2 justify-center items-center mt-2">
-                        <div className="grid h-36 w-36 place-items-center rounded-full bg-gray-300">
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                fill="none"
-                                viewBox="0 0 24 24"
-                                strokeWidth={2}
-                                stroke="currentColor"
-                                className="h-12 w-12 text-gray-500"
-                            >
-                                <path
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
-                                    d="m2.25 15.75 5.159-5.159a2.25 2.25 0 0 1 3.182 0l5.159 5.159m-1.5-1.5 1.409-1.409a2.25 2.25 0 0 1 3.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 0 0 1.5-1.5V6a1.5 1.5 0 0 0-1.5-1.5H3.75A1.5 1.5 0 0 0 2.25 6v12a1.5 1.5 0 0 0 1.5 1.5Zm10.5-11.25h.008v.008h-.008V8.25Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z"
-                                />
-                            </svg>
-                        </div>
-                    </div>
-                </CardHeader>
-                <CardBody>
-                    <div className="flex flex-col gap-4 justify-center items-center text-center">
-                        <Typography variant="h2" className="mb-2">
-                            {error !== "API rate limit exceeded" && (
-                                <span> el usuario no existe</span>
-                            )}
-                        </Typography>
-                        <Typography variant="lead" className="mb-2">
-                            {error === "API rate limit exceeded" && (
-                                <div>
-                                    <p>
-                                        Has excedido el límite de llamadas a la
-                                        API. Intenta de nuevo más tarde o
-                                        autentica tus solicitudes para obtener
-                                        un límite mayor.
-                                    </p>
-                                </div>
-                            )}
-                        </Typography>
-                    </div>
-                </CardBody>
-            </Card>
-        </>
-    );
-};
