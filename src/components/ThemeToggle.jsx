@@ -1,4 +1,4 @@
-import { useTheme } from "../context/ThemeContext";
+import { useTheme } from "@/context/ThemeContext";
 import { Button } from "@material-tailwind/react";
 
 const ThemeToggle = () => {

@@ -6,7 +6,7 @@ import {
     Avatar,
     Button,
 } from "@material-tailwind/react";
-import { formatJoinDate } from "../../../utils/formatters";
+import { formatJoinDate } from "@/utils/formatters";
 
 // --- Íconos para Estadísticas y Enlaces ---
 
