@@ -1,6 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { Button, Input } from "@material-tailwind/react";
-import { Spinner } from "@material-tailwind/react";
+
+// Icono de búsqueda
+const SearchIcon = (props) => (
+    <svg {...props} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
+        <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
+    </svg>
+);
 
 /**
  * Barra de búsqueda para encontrar usuarios de GitHub.
@@ -11,7 +17,6 @@ const SearchBar = ({ onSearch, isLoading, hasError }) => {
     const [validationError, setValidationError] = useState(false);
 
     useEffect(() => {
-        // Limpiar el error de validación si el usuario empieza a escribir
         if (searchText && validationError) {
             setValidationError(false);
         }
@@ -23,54 +28,40 @@ const SearchBar = ({ onSearch, isLoading, hasError }) => {
             return;
         }
         onSearch(searchText);
-        // No limpiar el texto aquí para que el usuario vea lo que buscó
     };
 
     const handleKeyPress = (event) => {
         if (event.key === 'Enter') {
             handleSearch();
         }
-    }
-
-    const isDisabled = isLoading || hasError;
-
-    // Clases para el Input que cambian con el error de validación
-    const inputErrorClass = validationError 
-        ? "border-red-500 text-red-500" 
-        : "border-gray-400 dark:border-gray-600";
+    };
+    
+    // El campo solo debe deshabilitarse mientras se carga, no si hay un error.
+    const isDisabled = isLoading;
 
     return (
-        <div className="relative flex w-full max-w-[24rem]">
+        <div className="relative flex w-full max-w-md">
             <Input
                 type="text"
                 label="Buscar usuario de GitHub..."
                 value={searchText}
                 onChange={(e) => setSearchText(e.target.value)}
                 onKeyPress={handleKeyPress}
-                className={`!border ${inputErrorClass} bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 placeholder-shown:border-t-blue-gray-200`}
+                className="pr-20" // Se mantiene solo el padding para el botón
                 containerProps={{
                     className: `min-w-0 ${validationError ? "animate-shake" : ""}`,
                 }}
-                labelProps={{
-                    className: "dark:text-gray-400",
-                }}
+                color="blue" // Se usa la prop del componente para el color de foco
+                error={validationError}
                 disabled={isDisabled}
             />
             <Button
                 size="sm"
-                className="!absolute right-1 top-1 rounded flex items-center justify-center gap-2
-                           bg-gray-800 text-white dark:bg-blue-600 dark:hover:bg-blue-700"
+                className="!absolute right-1 top-1/2 -translate-y-1/2 rounded bg-gray-800 text-white dark:bg-blue-600 dark:hover:bg-blue-700"
                 onClick={handleSearch}
                 disabled={isDisabled}
             >
-                {isLoading ? (
-                    <>
-                        <Spinner className="h-4 w-4" />
-                        Buscando...
-                    </>
-                ) : (
-                    "Buscar"
-                )}
+                <SearchIcon className="h-5 w-5" />
             </Button>
         </div>
     );
