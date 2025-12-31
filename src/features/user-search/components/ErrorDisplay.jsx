@@ -1,20 +1,21 @@
-import React from "react";
+
 import {
     Card,
     CardBody,
     Typography,
 } from "@material-tailwind/react";
-
-const ErrorIcon = (props) => (
-    <svg {...props} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
-        <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z" />
-    </svg>
-);
-
+import { FiAlertTriangle } from "react-icons/fi";
+import PropTypes from 'prop-types';
 
 /**
  * Muestra un mensaje de error estandarizado.
  * @param {{ error: string }} props
+ */
+/**
+ * A component to display error messages.
+ * @param {object} props - The component props.
+ * @param {string | null} props.error - The error message to display. If null or empty, nothing is rendered.
+ * @returns {JSX.Element | null} The error message display component or null if no error.
  */
 const ErrorDisplay = ({ error }) => {
     let title;
@@ -40,7 +41,7 @@ const ErrorDisplay = ({ error }) => {
                        dark:bg-red-900/20 dark:text-red-300 dark:border-red-500/30"
         >
             <CardBody className="flex flex-col items-center text-center p-6">
-                 <ErrorIcon className="w-12 h-12 text-red-400 dark:text-red-500/80 mb-4" />
+                 <FiAlertTriangle className="w-12 h-12 text-red-400 dark:text-red-500/80 mb-4" />
                 <Typography variant="h5" className="text-red-800 dark:text-red-200 font-bold mb-2">
                     {title}
                 </Typography>
@@ -50,6 +51,10 @@ const ErrorDisplay = ({ error }) => {
             </CardBody>
         </Card>
     );
+};
+
+ErrorDisplay.propTypes = {
+    error: PropTypes.string.isRequired,
 };
 
 export default ErrorDisplay;

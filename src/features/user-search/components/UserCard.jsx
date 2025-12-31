@@ -1,4 +1,4 @@
-import React from "react";
+
 import {
     Card,
     CardBody,
@@ -7,26 +7,18 @@ import {
     Button,
 } from "@material-tailwind/react";
 import { formatJoinDate } from "@/utils/formatters";
+import { FiUsers, FiUserPlus, FiGitBranch, FiArrowUpRight } from "react-icons/fi";
+import PropTypes from 'prop-types';
 
-// --- Íconos para Estadísticas y Enlaces ---
 
-const RepoIcon = (props) => (
-    <svg {...props} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor"><path d="M2 2.5A2.5 2.5 0 0 1 4.5 0h8.75a.75.75 0 0 1 .75.75v12.5a.75.75 0 0 1-.75.75h-2.5a.75.75 0 0 1 0-1.5h1.75v-2h-8a1 1 0 0 0-.714 1.7.75.75 0 0 1-1.072 1.05A2.495 2.495 0 0 1 2 11.5v-9Zm10.5-1V9h-8c-.356 0-.694.074-1 .208V2.5a1 1 0 0 1 1-1h8Z"></path></svg>
-);
-const FollowersIcon = (props) => (
-    <svg {...props} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor"><path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6ZM12.735 14c.618 0 1.093-.561.872-1.139a6.002 6.002 0 0 0-11.215 0c-.22.578.254 1.139.872 1.139h9.47Z"></path></svg>
-);
-const FollowingIcon = (props) => (
-    <svg {...props} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor"><path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6Zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0Zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4Z"></path></svg>
-);
-const ArrowUpRightIcon = (props) => (
-    <svg {...props} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor">
-        <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 19.5l15-15m0 0H8.25m11.25 0v11.25" />
-    </svg>
-);
-
-// --- Componentes Internos ---
-
+/**
+ * A sub-component to display a single user statistic (e.g., Repos, Followers).
+ * @param {object} props - The component props.
+ * @param {React.ElementType} props.icon - The icon component to display next to the statistic.
+ * @param {string} props.label - The label for the statistic (e.g., "Repos").
+ * @param {number} props.value - The numerical value of the statistic.
+ * @returns {JSX.Element} The user statistic display component.
+ */
 const UserStat = ({ icon: Icon, label, value }) => (
     <div className="flex flex-col items-center text-center">
         <Icon className="w-6 h-6 text-gray-600 dark:text-gray-400 mb-1" />
@@ -39,9 +31,19 @@ const UserStat = ({ icon: Icon, label, value }) => (
     </div>
 );
 
+UserStat.propTypes = {
+    icon: PropTypes.elementType.isRequired,
+    label: PropTypes.string.isRequired,
+    value: PropTypes.number.isRequired,
+};
+
 /**
- * Tarjeta de presentación para un usuario de GitHub, estilizada de forma limpia.
- * @param {{user: object | null}} props
+ * A clean-styled presentation card for a GitHub user.
+ * Displays user's avatar, name, login, join date, bio, key statistics (repos, followers, following),
+ * and a link to their GitHub profile.
+ * @param {object} props - The component props.
+ * @param {GithubUser | null} props.user - The GitHub user object to display, or null if no user is provided.
+ * @returns {JSX.Element | null} The user card component or null if no user is provided.
  */
 const UserCard = ({ user }) => {
     if (!user) {
@@ -57,7 +59,7 @@ const UserCard = ({ user }) => {
 
     return (
         <Card
-            variant="outlined"
+            variant="filled"
             shadow={false}
             className="w-full max-w-md bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm border-gray-300 dark:border-gray-700"
         >
@@ -85,9 +87,9 @@ const UserCard = ({ user }) => {
 
                 {/* Estadísticas */}
                 <div className="mt-8 grid grid-cols-3 gap-4 rounded-lg bg-gray-50 dark:bg-gray-900/30 p-4 border border-gray-200 dark:border-gray-700/50">
-                    <UserStat icon={RepoIcon} label="Repos" value={public_repos || 0} />
-                    <UserStat icon={FollowersIcon} label="Followers" value={followers || 0} />
-                    <UserStat icon={FollowingIcon} label="Following" value={following || 0} />
+                    <UserStat icon={FiGitBranch} label="Repos" value={public_repos || 0} />
+                    <UserStat icon={FiUsers} label="Followers" value={followers || 0} />
+                    <UserStat icon={FiUserPlus} label="Following" value={following || 0} />
                 </div>
                 
                 {/* Enlace a GitHub */}
@@ -98,12 +100,26 @@ const UserCard = ({ user }) => {
                         className="flex items-center justify-center gap-3 border-gray-400 dark:border-gray-600 text-gray-700 dark:text-gray-300"
                     >
                         Ver Perfil en GitHub
-                        <ArrowUpRightIcon className="h-4 w-4" />
+                        <FiArrowUpRight className="h-4 w-4" />
                     </Button>
                 </a>
             </CardBody>
         </Card>
     );
+};
+
+UserCard.propTypes = {
+    user: PropTypes.shape({
+        avatar_url: PropTypes.string.isRequired,
+        name: PropTypes.string, // Can be null
+        login: PropTypes.string.isRequired,
+        bio: PropTypes.string, // Can be null
+        created_at: PropTypes.string.isRequired,
+        public_repos: PropTypes.number.isRequired,
+        followers: PropTypes.number.isRequired,
+        following: PropTypes.number.isRequired,
+        html_url: PropTypes.string.isRequired,
+    }),
 };
 
 export default UserCard;

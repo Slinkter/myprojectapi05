@@ -1,34 +1,22 @@
-import React, { createContext, useContext, useState, useEffect } from 'react';
+import { createContext } from 'react';
+import PropTypes from 'prop-types';
+import { useThemeLogic } from './useThemeLogic'; // Import the new hook
 
-const ThemeContext = createContext();
+/**
+ * Context for managing the application's theme (light/dark mode).
+ * Provides the current theme and a function to toggle it.
+ */
+export const ThemeContext = createContext();
 
-export const useTheme = () => useContext(ThemeContext);
-
+/**
+ * Provides the theme context to its children.
+ * It uses the `useThemeLogic` hook to manage theme state and logic.
+ * @param {object} props - The component props.
+ * @param {React.ReactNode} props.children - The child components to render within the theme context.
+ * @returns {JSX.Element} A React context provider.
+ */
 export const ThemeProvider = ({ children }) => {
-    const [theme, setTheme] = useState(() => {
-        const storedTheme = localStorage.getItem('theme');
-        if (storedTheme) {
-            return storedTheme;
-        }
-        // Si no hay nada en localStorage, usar la preferencia del sistema
-        return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-    });
-
-    useEffect(() => {
-        const root = window.document.documentElement;
-        
-        if (theme === 'dark') {
-            root.classList.add('dark');
-        } else {
-            root.classList.remove('dark');
-        }
-
-        localStorage.setItem('theme', theme);
-    }, [theme]);
-
-    const toggleTheme = () => {
-        setTheme((prevTheme) => (prevTheme === 'light' ? 'dark' : 'light'));
-    };
+    const { theme, toggleTheme } = useThemeLogic(); // Use the new hook
 
     const value = {
         theme,
@@ -40,4 +28,8 @@ export const ThemeProvider = ({ children }) => {
             {children}
         </ThemeContext.Provider>
     );
+};
+
+ThemeProvider.propTypes = {
+    children: PropTypes.node.isRequired,
 };

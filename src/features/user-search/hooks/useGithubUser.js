@@ -1,9 +1,11 @@
 import { useState, useCallback } from "react";
-import { fetchUser } from "@/services/github";
+import { fetchUser } from "../services/github";
+import { isValidGithubUsername } from "@/domain/github-user/rules"; // New import
 
 /**
- * Hook personalizado para buscar usuarios de GitHub.
- * Gestiona el estado de la carga, los errores y los datos del usuario.
+ * Custom hook to search for GitHub users.
+ * Manages loading state, errors, and user data.
+ * Includes validation for the GitHub username before making an API call.
  * @returns {{
  *  user: object | null,
  *  isLoading: boolean,
@@ -20,6 +22,13 @@ export const useGithubUser = () => {
         setIsLoading(true);
         setError(null);
         setUser(null); // Limpiar usuario anterior en nueva búsqueda
+
+        if (!isValidGithubUsername(username)) { // New validation logic
+            setError("Invalid GitHub username.");
+            setIsLoading(false);
+            setUser(null);
+            return;
+        }
 
         try {
             const userData = await fetchUser(username);

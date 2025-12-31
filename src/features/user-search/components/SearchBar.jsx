@@ -1,18 +1,17 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from 'react';
 import { Button, Input } from "@material-tailwind/react";
-
-// Icono de búsqueda
-const SearchIcon = (props) => (
-    <svg {...props} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
-        <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
-    </svg>
-);
+import { FiSearch } from "react-icons/fi";
+import PropTypes from 'prop-types';
 
 /**
- * Barra de búsqueda para encontrar usuarios de GitHub.
- * @param {{onSearch: (username: string) => void, isLoading: boolean, hasError: boolean}} props
+ * Search bar component for finding GitHub users.
+ * @param {object} props - The component props.
+ * @param {(username: string) => void} props.onSearch - Callback function to execute when a search is performed.
+ * @param {boolean} props.isLoading - Indicates if a search is currently in progress.
+ * @param {boolean} props.hasError - Indicates if there was an error in the last search attempt (used for propTypes validation, not directly within the component's rendering logic).
+ * @returns {JSX.Element} The search bar component.
  */
-const SearchBar = ({ onSearch, isLoading, hasError }) => {
+const SearchBar = ({ onSearch, isLoading }) => {
     const [searchText, setSearchText] = useState("");
     const [validationError, setValidationError] = useState(false);
 
@@ -61,10 +60,16 @@ const SearchBar = ({ onSearch, isLoading, hasError }) => {
                 onClick={handleSearch}
                 disabled={isDisabled}
             >
-                <SearchIcon className="h-5 w-5" />
+                <FiSearch className="h-5 w-5" />
             </Button>
         </div>
     );
+};
+
+SearchBar.propTypes = {
+    onSearch: PropTypes.func.isRequired,
+    isLoading: PropTypes.bool.isRequired,
+    hasError: PropTypes.bool.isRequired,
 };
 
 export default SearchBar;

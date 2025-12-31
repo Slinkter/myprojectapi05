@@ -1,16 +1,12 @@
 /**
- * @file Contiene funciones de utilidad para formatear datos.
+ * Formats an ISO date string into a localized date string (e.g., "31 de Diciembre de 2025").
+ * @param {string} isoDateString - The ISO 8601 formatted date string.
+ * @returns {string} The formatted date string.
  */
-
-/**
- * Formatea un string de fecha ISO a un formato legible "DD Mes YYYY".
- * @param {string | undefined} dateString - El string de fecha en formato ISO.
- * @returns {string} - La fecha formateada o un string vacío si la entrada es inválida.
- */
-export const formatJoinDate = (dateString) => {
-    if (!dateString) return "";
+export const formatJoinDate = (isoDateString) => {
+    if (!isoDateString) return "";
     
-    const date = new Date(dateString);
+    const date = new Date(isoDateString);
     if (isNaN(date.getTime())) {
         return "Fecha inválida";
     }
