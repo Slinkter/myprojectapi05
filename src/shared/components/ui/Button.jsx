@@ -1,16 +1,25 @@
 import PropTypes from "prop-types";
 
 /**
- * Custom Button component using pure Tailwind CSS.
- * @param {object} props - Component props
- * @param {React.ReactNode} props.children - Button content
- * @param {string} props.variant - Button variant: 'filled' | 'outlined' | 'text'
- * @param {string} props.size - Button size: 'sm' | 'md' | 'lg'
- * @param {boolean} props.fullWidth - Whether button should be full width
- * @param {string} props.className - Additional CSS classes
- * @param {boolean} props.disabled - Whether button is disabled
- * @param {function} props.onClick - Click handler
- * @returns {JSX.Element}
+ * Componente de Botón reutilizable con estilos de Tailwind encapsulados.
+ *
+ * **Funcionalidad:**
+ * - Provee una interfaz consistente para botones en la aplicación
+ * - Soporta múltiples variantes (filled, outlined, text) y tamaños
+ * - Gestiona estados de hover, focus y disabled automáticamente
+ *
+ * **Flujo de renderizado:**
+ * - Combina clases base, variantes, tamaños y clases personalizadas (`className`) para generar la clase final
+ *
+ * @param {object} props
+ * @param {React.ReactNode} props.children - Contenido del botón
+ * @param {'filled'|'outlined'|'text'} [props.variant='filled'] - Estilo visual
+ * @param {'sm'|'md'|'lg'} [props.size='md'] - Tamaño del botón
+ * @param {boolean} [props.fullWidth=false] - Si debe ocupar el 100% del ancho
+ * @param {string} [props.className=''] - Clases adicionales de Tailwind
+ * @param {boolean} [props.disabled=false] - Estado deshabilitado
+ * @param {function} [props.onClick] - Manejador de evento click
+ * @returns {JSX.Element} Elemento button HTML estilizado
  */
 const Button = ({
   children,

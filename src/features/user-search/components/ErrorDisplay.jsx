@@ -3,7 +3,22 @@ import { FiAlertTriangle } from "react-icons/fi";
 import PropTypes from "prop-types";
 
 /**
- * Minimalist error display component.
+ * Componente para visualización amigable de errores.
+ *
+ * **Funcionalidad:**
+ * - Transforma mensajes de error técnicos en mensajes amigables para el usuario
+ * - Categoriza los errores comunes (404, Rate Limit, Genéricos)
+ * - Provee feedback visual claro mediante iconos y colores de alerta
+ *
+ * **Flujo de renderizado:**
+ * 1. Recibe el string de `error`
+ * 2. Evalúa el tipo de error en un switch case
+ * 3. Asigna Título y Mensaje descriptivo correspondiente
+ * 4. Renderiza una tarjeta con la información y animación de atención (shake)
+ *
+ * @param {object} props
+ * @param {string} props.error - El mensaje de error original recibido del backend/hook
+ * @returns {JSX.Element} Tarjeta de error formateada
  */
 const ErrorDisplay = ({ error }) => {
   let title;

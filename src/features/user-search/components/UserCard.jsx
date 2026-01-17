@@ -1,4 +1,10 @@
-import { Card, CardBody, CardHeader, CardFooter, Button } from "@/shared/components/ui";
+import {
+  Card,
+  CardBody,
+  CardHeader,
+  CardFooter,
+  Button,
+} from "@/shared/components/ui";
 import { formatJoinDate } from "@/shared/utils/formatters";
 import {
   FiUsers,
@@ -9,17 +15,21 @@ import {
 import PropTypes from "prop-types";
 
 /**
- * @file Tarjeta de presentación para un usuario de GitHub.
- * @description Muestra la información clave del perfil de un usuario, incluyendo avatar, estadísticas y un enlace a su perfil.
+ * @file Tarjeta de presentación para usuariode GitHub con estadísticas y detalles.
  */
 
 /**
- * Componente para mostrar una estadística individual del usuario (ej. Followers).
- * @param {object} props - Propiedades del componente.
- * @param {React.ElementType} props.icon - El icono a mostrar.
- * @param {string} props.label - La etiqueta de la estadística.
- * @param {number} props.value - El valor de la estadística.
- * @returns {JSX.Element}
+ * Sub-componente para mostrar una estadística individual.
+ *
+ * **Funcionalidad:**
+ * - Renderiza un icono, etiqueta y valor numérico de forma vertical
+ * - Formatea números usando `toLocaleString` para mejor legibilidad
+ *
+ * @param {object} props
+ * @param {React.ElementType} props.icon - Componente de icono (React Icons)
+ * @param {string} props.label - Texto descriptivo (ej: "Repos")
+ * @param {number} props.value - Valor numérico a mostrar
+ * @returns {JSX.Element} Elemento de estadística
  */
 const UserStat = ({ icon: Icon, label, value }) => (
   <div className="flex flex-col items-center text-center">
@@ -40,10 +50,22 @@ UserStat.propTypes = {
 };
 
 /**
- * Componente principal de la tarjeta de usuario.
- * @param {object} props - Propiedades del componente.
- * @param {object} props.user - El objeto de usuario de GitHub.
- * @returns {JSX.Element|null}
+ * Tarjeta principal de presentación de usuario.
+ *
+ * **Funcionalidad:**
+ * - Presenta la información detallada del perfil (Avatar, Bio, Stats)
+ * - Muestra enlaces externos al perfil de GitHub
+ * - Maneja el renderizado condicional si no hay usuario (retorna null)
+ *
+ * **Flujo de renderizado:**
+ * 1. Verifica si la prop `user` existe
+ * 2. Desestructura las propiedades necesarias
+ * 3. Formatea fechas (`formatJoinDate`)
+ * 4. Renderiza la UI usando componentes `Card` compuestos
+ *
+ * @param {object} props
+ * @param {object} props.user - Datos del usuario obtenidos de la API
+ * @returns {JSX.Element|null} La tarjeta renderizada o null si no hay datos
  */
 const UserCard = ({ user }) => {
   if (!user) {
@@ -82,7 +104,7 @@ const UserCard = ({ user }) => {
           Desde {joinDate}
         </p>
       </CardHeader>
-      
+
       <CardBody>
         {bio && (
           <p className="text-center text-sm text-gray-600 dark:text-gray-300 mb-6 leading-relaxed">
@@ -106,7 +128,12 @@ const UserCard = ({ user }) => {
       </CardBody>
 
       <CardFooter>
-        <a href={html_url} target="_blank" rel="noopener noreferrer" className="w-full">
+        <a
+          href={html_url}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="w-full"
+        >
           <Button
             fullWidth
             variant="filled"

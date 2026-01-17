@@ -2,9 +2,19 @@ import { useTheme } from "@/shared/context/useTheme";
 import { FiSun, FiMoon } from "react-icons/fi";
 
 /**
- * A floating action button component that allows users to toggle between light and dark themes.
- * Features a minimalist design with smooth transitions and hover effects.
- * @returns {JSX.Element} The ThemeToggle button component.
+ * Componente de botón flotante para alternar temas.
+ *
+ * **Funcionalidad:**
+ * - Permite al usuario cambiar entre modos claro y oscuro (toggle)
+ * - Proporciona feedback visual instantáneo con animaciones suaves
+ * - Persiste la posición fija en la interfaz (Floating Action Button)
+ *
+ * **Flujo de interacción:**
+ * 1. Lee el estado actual (`theme`) del contexto
+ * 2. Renderiza el icono opuesto al tema actual (Sol si es Dark, Luna si es Light)
+ * 3. Al hacer click, invoca `toggleTheme` para actualizar el contexto global
+ *
+ * @returns {JSX.Element} El botón de cambio de tema
  */
 const ThemeToggle = () => {
   const { theme, toggleTheme } = useTheme();

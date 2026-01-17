@@ -1,10 +1,15 @@
 /**
- * @file Componente de encabezado principal de la aplicación.
- * Muestra el título y una breve descripción del propósito de la aplicación.
- * Es un componente de presentación puro y reutilizable.
+ * Componente de encabezado (Header) de la aplicación.
+ *
+ * **Funcionalidad:**
+ * - Muestra la identidad visual de la aplicación (Título y subtítulo)
+ * - Actúa como componente puro de presentación
+ *
+ * **Flujo de inicialización:**
+ * - Renderizado estático de elementos HTML con clases de Tailwind
  *
  * @component
- * @returns {JSX.Element} El componente de encabezado.
+ * @returns {JSX.Element} Elemento header con título y descripción
  */
 const Header = () => {
   return (

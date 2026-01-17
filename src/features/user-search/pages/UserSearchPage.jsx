@@ -1,13 +1,32 @@
 import { useEffect } from "react";
 import { ErrorBoundary, LoadingSpinner } from "@/shared/components/ui";
 import { useUserSearch } from "@/features/user-search/context";
-import { SearchBar, UserCard, ErrorDisplay } from "@/features/user-search/components";
+import {
+  SearchBar,
+  UserCard,
+  ErrorDisplay,
+} from "@/features/user-search/components";
 import { FiGithub } from "react-icons/fi";
 
 /**
- * @file Página principal de búsqueda de usuarios.
- * @description Orquesta los componentes de la feature de búsqueda y muestra los diferentes estados (carga, error, éxito, inicial).
- * @returns {JSX.Element} La página de búsqueda de usuarios.
+ * Página principal de búsqueda de usuarios.
+ *
+ * **Funcionalidad:**
+ * - Actúa como orquestador (Container Component) de la feature de búsqueda
+ * - Consume el contexto `useUserSearch` para obtener el estado global
+ * - Gestiona el renderizado condicional de la UI basado en el estado (Idle, Loading, Error, Success)
+ *
+ * **Flujo de renderizado:**
+ * 1. Obtiene `user`, `isLoading`, `error` del hook
+ * 2. Determina si mostrar el estado inicial (sin datos, sin carga, sin error)
+ * 3. Renderiza el `SearchBar` siempre visible
+ * 4. Renderiza condicionalmente `LoadingSpinner`, `ErrorDisplay`, `InitialState` o `UserCard`
+ *
+ * **Efectos secundarios:**
+ * - (Comentado actualmente) Podría disparar una búsqueda inicial al montar
+ *
+ * @component
+ * @returns {JSX.Element} La página completa de búsqueda de usuarios
  */
 const UserSearchPage = () => {
   const { user, isLoading, error, searchUser } = useUserSearch();
@@ -44,7 +63,7 @@ const UserSearchPage = () => {
             <ErrorDisplay error={error} />
           </div>
         )}
-        
+
         {hasInitialState && (
           <div className="col-span-full flex flex-col items-center justify-center text-center">
             <FiGithub className="w-24 h-24 text-gray-300 dark:text-gray-700 mb-4" />
@@ -52,7 +71,8 @@ const UserSearchPage = () => {
               Bienvenido a GitHub Explorer
             </h2>
             <p className="text-gray-500 dark:text-gray-400 mt-2">
-              Usa la barra de búsqueda para encontrar perfiles de desarrolladores.
+              Usa la barra de búsqueda para encontrar perfiles de
+              desarrolladores.
             </p>
           </div>
         )}

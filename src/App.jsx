@@ -2,9 +2,19 @@ import { UserSearchPage } from "@/features/user-search/pages";
 import { Header } from "@/shared/components";
 
 /**
- * @file Componente principal de la aplicación (App).
- * @description Orquesta el layout general y los componentes principales.
- * @returns {JSX.Element} El componente raíz de la aplicación.
+ * Componente principal de la aplicación (App).
+ *
+ * **Funcionalidad:**
+ * - Actúa como el contenedor raíz de la aplicación
+ * - Define la estructura de layout global (Grid layout)
+ * - Integra los componentes principales (`Header` y `UserSearchPage`)
+ *
+ * **Flujo de renderizado:**
+ * 1. Establece el contenedor principal con estilos globales (fondo, altura mínima)
+ * 2. Renderiza el Header en la parte superior
+ * 3. Renderiza la página de búsqueda en el área de contenido principal
+ *
+ * @returns {JSX.Element} El componente raíz de la aplicación
  */
 const App = () => {
   return (

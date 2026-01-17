@@ -9,10 +9,18 @@ const API_BASE_URL = "https://api.github.com";
  * Obtiene los datos del perfil de un usuario de GitHub.
  *
  * **Funcionalidad:**
- * - Realiza una petición GET a la API pública de GitHub
- * - Valida que el username no esté vacío
- * - Maneja diferentes códigos de estado HTTP
- * - Parsea y retorna los datos del usuario en formato JSON
+ * - Realiza una petición HTTP GET a la API pública de GitHub
+ * - Valida la entrada (username) antes de la petición
+ * - Normaliza las respuestas de error (404, 403, etc.) en excepciones controladas
+ *
+ * **Flujo de ejecución:**
+ * 1. Verifica si el username es válido
+ * 2. Construye la URL del endpoint
+ * 3. Ejecuta fetch() y espera la respuesta
+ * 4. Evalúa el status code para lanzar errores específicos o parsear el JSON
+ *
+ * **Efectos secundarios:**
+ * - Realiza una solicitud de red externa (Network Request)
  *
  * **Códigos de estado manejados:**
  * - 200: Éxito - Retorna datos del usuario
@@ -26,10 +34,7 @@ const API_BASE_URL = "https://api.github.com";
  *
  * @param {string} username - Nombre de usuario de GitHub (ej: 'octocat')
  * @returns {Promise<object>} Promesa que resuelve con los datos del perfil del usuario
- * @throws {Error} Si el username está vacío
- * @throws {Error} Si el usuario no existe (404)
- * @throws {Error} Si se excede el rate limit (403)
- * @throws {Error} Si ocurre cualquier otro error de la API
+ * @throws {Error} Si el username está vacío, el usuario no existe (404) o hay error de red
  *
  * @example
  * try {

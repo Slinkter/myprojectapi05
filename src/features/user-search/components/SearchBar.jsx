@@ -4,7 +4,25 @@ import { FiSearch } from "react-icons/fi";
 import PropTypes from "prop-types";
 
 /**
- * Minimalist search bar component for finding GitHub users.
+ * Componente de barra de búsqueda minimalista.
+ *
+ * **Funcionalidad:**
+ * - Captura la entrada del usuario para buscar perfiles de GitHub
+ * - Maneja validaciones locales (campo vacío)
+ * - Gestiona el estado de carga visualmente (deshabilita inputs)
+ *
+ * **Flujo de interacción:**
+ * 1. El usuario escribe en el input (estado local `searchText`)
+ * 2. Al presionar Enter o Click en buscar, se valida la entrada
+ * 3. Si es válido, se invoca `onSearch` padre; si no, muestra error visual
+ *
+ * **Efectos secundarios:**
+ * - Limpia el estado de error automáticamente cuando el usuario vuelve a escribir
+ *
+ * @param {object} props
+ * @param {function} props.onSearch - Callback para ejecutar la búsqueda
+ * @param {boolean} props.isLoading - Estado de carga para deshabilitar controles
+ * @returns {JSX.Element} El componente de barra de búsqueda
  */
 const SearchBar = ({ onSearch, isLoading }) => {
   /*  */
