@@ -1,4 +1,4 @@
-import { useTheme } from "@/context/useTheme";
+import { useTheme } from "@/shared/context/useTheme";
 import { FiSun, FiMoon } from "react-icons/fi";
 
 /**

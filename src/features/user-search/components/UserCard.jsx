@@ -1,5 +1,5 @@
 import { Card, CardBody, Button } from "@/shared/components/ui";
-import { formatJoinDate } from "@/utils/formatters";
+import { formatJoinDate } from "@/shared/utils/formatters";
 import {
   FiUsers,
   FiUserPlus,
