@@ -1,5 +1,5 @@
 import { useState, useCallback } from "react";
-import { fetchUser } from "../services/github";
+import { fetchUser } from "@/infrastructure/services/github";
 import { isValidGithubUsername } from "@/domain/github-user/rules"; // New import
 
 /**

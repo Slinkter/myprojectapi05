@@ -1,9 +1,9 @@
 import { useEffect } from "react";
-import { Spinner, ErrorBoundary } from "@/components/ui";
-import { useGithubUser } from "@/features/user-search/hooks/useGithubUser";
-import SearchBar from "@/features/user-search/components/SearchBar";
-import UserCard from "@/features/user-search/components/UserCard";
-import ErrorDisplay from "@/features/user-search/components/ErrorDisplay";
+import { Spinner, ErrorBoundary } from "@/presentation/components/ui";
+import { useGithubUser } from "@/presentation/hooks/useGithubUser";
+import SearchBar from "@/presentation/components/user-search/SearchBar";
+import UserCard from "@/presentation/components/user-search/UserCard";
+import ErrorDisplay from "@/presentation/components/user-search/ErrorDisplay";
 
 /**
  * Renders the user search page, including the search bar, user card, and error display.
