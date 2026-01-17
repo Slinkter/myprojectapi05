@@ -52,22 +52,22 @@ const UserCard = ({ user }) => {
   const joinDate = formatJoinDate(created_at);
 
   return (
-    <Card className="w-full max-w-md bg-white dark:bg-gray-800">
+    <Card className="w-full max-w-md bg-white dark:bg-gray-800 transition-all duration-300 hover:shadow-lg hover:dark:shadow-blue-800/20">
       <CardBody className="p-8">
         {/* Avatar and Name */}
-        <div className="flex flex-col items-center mb-6">
+        <div className="flex flex-col items-center mb-6 gap-2">
           <img
             src={avatar_url || ""}
             alt={`Avatar de ${login}`}
-            className="w-20 h-20 rounded-full object-cover mb-3"
+            className="w-24 h-24 rounded-full object-cover mb-3"
           />
-          <h2 className="text-xl font-bold text-gray-900 dark:text-gray-100">
+          <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100">
             {name || login}
           </h2>
           <p className="text-sm text-gray-500 dark:text-gray-400 mt-0.5">
             @{login}
           </p>
-          <p className="text-xs text-gray-400 dark:text-gray-500 mt-1">
+          <p className="text-xs text-gray-400 dark:text-gray-500/70 mt-1">
             Desde {joinDate}
           </p>
         </div>

@@ -23,11 +23,17 @@ export default {
           "0%": { opacity: "0", transform: "translateY(20px)" },
           "100%": { opacity: "1", transform: "translateY(0)" },
         },
+        "spinner-path": {
+          "0%": { strokeDashoffset: 251.2 },
+          "50%": { strokeDashoffset: 62.8, transform: "rotate(90deg)" },
+          "100%": { strokeDashoffset: 251.2, transform: "rotate(360deg)" },
+        },
       },
       animation: {
         shake: "shake 0.5s ease-in-out",
         "fade-in": "fade-in 0.5s ease-out",
         "slide-up": "slide-up 0.6s ease-out",
+        "spinner-path": "spinner-path 1.5s ease-in-out infinite",
       },
     },
   },

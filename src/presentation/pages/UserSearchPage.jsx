@@ -1,5 +1,6 @@
 import { useEffect } from "react";
-import { Spinner, ErrorBoundary } from "@/presentation/components/ui";
+import { ErrorBoundary } from "@/presentation/components/ui";
+import LoadingSpinner from "@/presentation/components/ui/LoadingSpinner";
 import { useUserSearch } from "@/presentation/context/UserSearchContext";
 import SearchBar from "@/presentation/components/user-search/SearchBar";
 import UserCard from "@/presentation/components/user-search/UserCard";
@@ -34,9 +35,9 @@ const UserSearchPage = () => {
         {/* Loading State */}
         {isLoading && (
           <div className="flex flex-col items-center justify-center pt-20 animate-fade-in">
-            <Spinner size="lg" color="blue" />
+            <LoadingSpinner size="w-16 h-16" color="text-blue-500" />
             <p className="mt-4 text-sm text-gray-500 dark:text-gray-400 animate-pulse">
-              Buscando usuario...
+              Buscando en la galaxia de GitHub...
             </p>
           </div>
         )}

@@ -26,9 +26,11 @@ const ErrorDisplay = ({ error }) => {
   }
 
   return (
-    <Card className="w-full max-w-md bg-white dark:bg-gray-800 border-red-200 dark:border-red-900">
+    <Card className="w-full max-w-md bg-white dark:bg-gray-800 border-red-200 dark:border-red-900 animate-shake">
       <CardBody className="flex flex-col items-center text-center p-8">
-        <FiAlertTriangle className="w-12 h-12 text-red-500 mb-4" />
+        <div className="p-3 bg-red-100 dark:bg-red-900/30 rounded-full mb-4">
+          <FiAlertTriangle className="w-8 h-8 text-red-500" />
+        </div>
         <h3 className="text-xl text-gray-900 dark:text-gray-100 font-bold mb-2">
           {title}
         </h3>
