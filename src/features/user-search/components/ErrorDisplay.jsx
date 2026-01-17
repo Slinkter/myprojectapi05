@@ -1,60 +1,45 @@
-
-import {
-    Card,
-    CardBody,
-    Typography,
-} from "@material-tailwind/react";
+import { Card, CardBody } from "@/components/ui";
 import { FiAlertTriangle } from "react-icons/fi";
-import PropTypes from 'prop-types';
+import PropTypes from "prop-types";
 
 /**
- * Muestra un mensaje de error estandarizado.
- * @param {{ error: string }} props
- */
-/**
- * A component to display error messages.
- * @param {object} props - The component props.
- * @param {string | null} props.error - The error message to display. If null or empty, nothing is rendered.
- * @returns {JSX.Element | null} The error message display component or null if no error.
+ * Minimalist error display component.
  */
 const ErrorDisplay = ({ error }) => {
-    let title;
-    let message;
+  let title;
+  let message;
 
-    switch (error) {
-        case "Usuario no encontrado.":
-            title = "Usuario No Encontrado";
-            message = "Parece que el usuario que buscas no existe. Por favor, revisa el nombre e inténtalo de nuevo.";
-            break;
-        case "Límite de tasa de la API excedido. Inténtalo más tarde.":
-            title = "Límite de API Excedido";
-            message = "Has excedido el límite de solicitudes. Por favor, espera un momento antes de volver a intentarlo.";
-            break;
-        default:
-            title = "Ocurrió un Error";
-            message = "Hubo un problema al contactar con la API de GitHub. Revisa tu conexión a internet.";
-    }
+  switch (error) {
+    case "Usuario no encontrado.":
+      title = "Usuario No Encontrado";
+      message =
+        "El usuario que buscas no existe. Verifica el nombre e inténtalo de nuevo.";
+      break;
+    case "Límite de tasa de la API excedido. Inténtalo más tarde.":
+      title = "Límite Excedido";
+      message =
+        "Has excedido el límite de solicitudes. Espera un momento antes de intentarlo.";
+      break;
+    default:
+      title = "Error";
+      message = "Hubo un problema al contactar con la API de GitHub.";
+  }
 
-    return (
-        <Card
-            className="w-full max-w-sm bg-red-50 text-red-700 border border-red-200 shadow-lg 
-                       dark:bg-red-900/20 dark:text-red-300 dark:border-red-500/30"
-        >
-            <CardBody className="flex flex-col items-center text-center p-6">
-                 <FiAlertTriangle className="w-12 h-12 text-red-400 dark:text-red-500/80 mb-4" />
-                <Typography variant="h5" className="text-red-800 dark:text-red-200 font-bold mb-2">
-                    {title}
-                </Typography>
-                <Typography className="text-red-700 dark:text-red-300">
-                    {message}
-                </Typography>
-            </CardBody>
-        </Card>
-    );
+  return (
+    <Card className="w-full max-w-md bg-white dark:bg-gray-800 border-red-200 dark:border-red-900">
+      <CardBody className="flex flex-col items-center text-center p-8">
+        <FiAlertTriangle className="w-12 h-12 text-red-500 mb-4" />
+        <h3 className="text-xl text-gray-900 dark:text-gray-100 font-bold mb-2">
+          {title}
+        </h3>
+        <p className="text-gray-600 dark:text-gray-400 text-sm">{message}</p>
+      </CardBody>
+    </Card>
+  );
 };
 
 ErrorDisplay.propTypes = {
-    error: PropTypes.string.isRequired,
+  error: PropTypes.string.isRequired,
 };
 
 export default ErrorDisplay;

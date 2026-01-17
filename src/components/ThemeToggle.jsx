@@ -1,32 +1,32 @@
 import { useTheme } from "@/context/useTheme";
-import { Button } from "@material-tailwind/react";
 import { FiSun, FiMoon } from "react-icons/fi";
 
 /**
  * A floating action button component that allows users to toggle between light and dark themes.
- * It displays a moon icon for light theme and a sun icon for dark theme.
+ * Features a minimalist design with smooth transitions and hover effects.
  * @returns {JSX.Element} The ThemeToggle button component.
  */
 const ThemeToggle = () => {
   const { theme, toggleTheme } = useTheme();
 
   return (
-    <Button
+    <button
       onClick={toggleTheme}
-      ripple={false}
-      className="fixed bottom-5 right-5 w-16 h-16 rounded-full flex items-center justify-center shadow-lg z-50
-                       bg-gray-800 text-white 
-                       dark:bg-yellow-400 dark:text-gray-900
-                       hover:bg-gray-700 dark:hover:bg-yellow-500
-                       transition-colors duration-200"
+      className="fixed bottom-6 right-6 w-14 h-14 rounded-full flex items-center justify-center shadow-lg hover:shadow-xl z-50
+                       bg-white dark:bg-gray-800
+                       border-2 border-gray-200 dark:border-gray-700
+                       text-gray-800 dark:text-yellow-400
+                       hover:scale-110 active:scale-95
+                       transition-all duration-300 ease-out
+                       group"
       aria-label="Toggle theme"
     >
       {theme === "light" ? (
-        <FiMoon className="w-8 h-8" />
+        <FiMoon className="w-6 h-6 transition-transform group-hover:rotate-12" />
       ) : (
-        <FiSun className="w-8 h-8" />
+        <FiSun className="w-6 h-6 transition-transform group-hover:rotate-90" />
       )}
-    </Button>
+    </button>
   );
 };
 

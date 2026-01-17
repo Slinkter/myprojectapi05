@@ -1,75 +1,68 @@
-import { useState, useEffect } from 'react';
-import { Button, Input } from "@material-tailwind/react";
+import { useState, useEffect } from "react";
+import { Button, Input } from "@/components/ui";
 import { FiSearch } from "react-icons/fi";
-import PropTypes from 'prop-types';
+import PropTypes from "prop-types";
 
 /**
- * Search bar component for finding GitHub users.
- * @param {object} props - The component props.
- * @param {(username: string) => void} props.onSearch - Callback function to execute when a search is performed.
- * @param {boolean} props.isLoading - Indicates if a search is currently in progress.
- * @param {boolean} props.hasError - Indicates if there was an error in the last search attempt (used for propTypes validation, not directly within the component's rendering logic).
- * @returns {JSX.Element} The search bar component.
+ * Minimalist search bar component for finding GitHub users.
  */
 const SearchBar = ({ onSearch, isLoading }) => {
-    const [searchText, setSearchText] = useState("");
-    const [validationError, setValidationError] = useState(false);
+  const [searchText, setSearchText] = useState("");
+  const [validationError, setValidationError] = useState(false);
 
-    useEffect(() => {
-        if (searchText && validationError) {
-            setValidationError(false);
-        }
-    }, [searchText, validationError]);
+  useEffect(() => {
+    if (searchText && validationError) {
+      setValidationError(false);
+    }
+  }, [searchText, validationError]);
 
-    const handleSearch = () => {
-        if (searchText.trim() === "") {
-            setValidationError(true);
-            return;
-        }
-        onSearch(searchText);
-    };
+  const handleSearch = () => {
+    if (searchText.trim() === "") {
+      setValidationError(true);
+      return;
+    }
+    onSearch(searchText);
+  };
 
-    const handleKeyPress = (event) => {
-        if (event.key === 'Enter') {
-            handleSearch();
-        }
-    };
-    
-    // El campo solo debe deshabilitarse mientras se carga, no si hay un error.
-    const isDisabled = isLoading;
+  const handleKeyPress = (event) => {
+    if (event.key === "Enter") {
+      handleSearch();
+    }
+  };
 
-    return (
-        <div className="relative flex w-full max-w-md">
-            <Input
-                type="text"
-                label="Buscar usuario de GitHub..."
-                value={searchText}
-                onChange={(e) => setSearchText(e.target.value)}
-                onKeyPress={handleKeyPress}
-                className="pr-20" // Se mantiene solo el padding para el botón
-                containerProps={{
-                    className: `min-w-0 ${validationError ? "animate-shake" : ""}`,
-                }}
-                color="blue" // Se usa la prop del componente para el color de foco
-                error={validationError}
-                disabled={isDisabled}
-            />
-            <Button
-                size="sm"
-                className="!absolute right-1 top-1/2 -translate-y-1/2 rounded bg-gray-800 text-white dark:bg-blue-600 dark:hover:bg-blue-700"
-                onClick={handleSearch}
-                disabled={isDisabled}
-            >
-                <FiSearch className="h-5 w-5" />
-            </Button>
-        </div>
-    );
+  const isDisabled = isLoading;
+
+  return (
+    <div className="relative w-full max-w-2xl">
+      <Input
+        type="text"
+        label="Buscar usuario de GitHub..."
+        value={searchText}
+        onChange={(e) => setSearchText(e.target.value)}
+        onKeyPress={handleKeyPress}
+        className="pr-14"
+        containerProps={{
+          className: `${validationError ? "animate-shake" : ""}`,
+        }}
+        error={validationError}
+        disabled={isDisabled}
+      />
+      <Button
+        size="sm"
+        onClick={handleSearch}
+        disabled={isDisabled}
+        className="!absolute right-1.5 top-1/2 -translate-y-1/2 rounded-md"
+      >
+        <FiSearch className="h-4 w-4" />
+      </Button>
+    </div>
+  );
 };
 
 SearchBar.propTypes = {
-    onSearch: PropTypes.func.isRequired,
-    isLoading: PropTypes.bool.isRequired,
-    hasError: PropTypes.bool.isRequired,
+  onSearch: PropTypes.func.isRequired,
+  isLoading: PropTypes.bool.isRequired,
+  hasError: PropTypes.bool.isRequired,
 };
 
 export default SearchBar;

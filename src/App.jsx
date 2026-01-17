@@ -1,30 +1,39 @@
-import { Typography } from "@material-tailwind/react";
+import { useState } from "react";
 import UserSearchPage from "@/pages/UserSearchPage";
+
+// Componente que falla intencionalmente para probar el ErrorBoundary
+const BuggyComponent = () => {
+  throw new Error("💥 Error simulado de renderizado!");
+};
 
 /**
  * Main application component.
- * It sets up the global layout, header, and renders the main feature page.
- * @returns {JSX.Element} The root application component.
+ * Minimalist design with clean aesthetics.
  */
 const App = () => {
+  const [shouldCrash, setShouldCrash] = useState(false);
+
   return (
-    <div className="min-h-dvh w-full bg-gray-50 dark:bg-gray-900 flex flex-col justify-center items-center p-4 sm:p-6 md:p-8 antialiased">
-      <header className="text-center mb-12">
-        <Typography
-          as="h1"
-          className="text-3xl sm:text-4xl font-bold tracking-tight text-gray-800 dark:text-gray-100"
-        >
+    <div className="min-h-screen w-full bg-gray-50 dark:bg-gray-900 flex flex-col justify-center items-center p-4 sm:p-6 md:p-8 antialiased transition-colors duration-300">
+      <header className="text-center mb-12 max-w-2xl">
+        <h1 className="font-macondo text-4xl sm:text-5xl font-bold text-gray-900 dark:text-gray-100 mb-3">
           GitHub Explorer
-        </Typography>
-        <Typography
-          variant="paragraph"
-          className="mt-2 text-base font-normal text-gray-500 dark:text-gray-400"
+        </h1>
+        <p className="text-gray-500 dark:text-gray-400 mb-4">
+          Descubre perfiles de desarrolladores
+        </p>
+
+        {/* Botón para activar el crash */}
+        <button
+          onClick={() => setShouldCrash(true)}
+          className="text-xs text-red-400 hover:text-red-500 underline cursor-pointer"
         >
-          Encuentra perfiles de desarrolladores de todo el mundo.
-        </Typography>
+          Probar Error Boundary
+        </button>
       </header>
 
-      <UserSearchPage />
+      {/* Si shouldCrash es true, renderiza el componente que falla */}
+      {shouldCrash ? <BuggyComponent /> : <UserSearchPage />}
     </div>
   );
 };

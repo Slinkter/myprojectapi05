@@ -1,37 +1,61 @@
 /**
+ * @file Define el modelo de datos para un usuario de GitHub.
+ * Este archivo contiene la definición TypeDef que documenta la estructura
+ * completa de un objeto de usuario retornado por la API de GitHub.
+ */
+
+/**
+ * Representa un usuario de GitHub con todos sus datos de perfil.
+ *
+ * **Propósito:**
+ * - Documentar la estructura de datos retornada por la API de GitHub
+ * - Proporcionar autocompletado en IDEs compatibles con JSDoc
+ * - Servir como contrato de datos para componentes que consumen usuarios
+ *
+ * **Fuente de datos:**
+ * - API Endpoint: GET https://api.github.com/users/{username}
+ * - Documentación: https://docs.github.com/en/rest/users/users
+ *
+ * **Propiedades principales:**
+ * - Identificación: login, id, node_id
+ * - Perfil público: name, bio, avatar_url, location, blog
+ * - Estadísticas: public_repos, followers, following
+ * - URLs: html_url (perfil), repos_url, followers_url, etc.
+ * - Metadatos: created_at, updated_at, type
+ *
  * @typedef {object} GithubUser
- * @property {string} login - The user's GitHub login.
- * @property {number} id - The user's GitHub ID.
- * @property {string} node_id - The user's Node ID.
- * @property {string} avatar_url - URL to the user's avatar image.
- * @property {string} gravatar_id - Gravatar ID.
- * @property {string} url - GitHub API URL for the user.
- * @property {string} html_url - URL to the user's GitHub profile.
- * @property {string} followers_url - URL to the user's followers.
- * @property {string} following_url - URL to the user's following.
- * @property {string} gists_url - URL to the user's gists.
- * @property {string} starred_url - URL to the user's starred repositories.
- * @property {string} subscriptions_url - URL to the user's subscriptions.
- * @property {string} organizations_url - URL to the user's organizations.
- * @property {string} repos_url - URL to the user's repositories.
- * @property {string} events_url - URL to the user's events.
- * @property {string} received_events_url - URL to the user's received events.
- * @property {string} type - Type of user (User, Organization).
- * @property {boolean} site_admin - Whether the user is a site administrator.
- * @property {string | null} name - The user's full name.
- * @property {string | null} company - The user's company.
- * @property {string | null} blog - The user's blog URL.
- * @property {string | null} location - The user's location.
- * @property {string | null} email - The user's email address.
- * @property {boolean | null} hireable - Whether the user is hireable.
- * @property {string | null} bio - The user's biography.
- * @property {string | null} twitter_username - The user's Twitter username.
- * @property {number} public_repos - Number of public repositories.
- * @property {number} public_gists - Number of public gists.
- * @property {number} followers - Number of followers.
- * @property {number} following - Number of users following.
- * @property {string} created_at - Date and time of account creation (ISO 8601).
- * @property {string} updated_at - Date and time of last profile update (ISO 8601).
+ * @property {string} login - Nombre de usuario único en GitHub
+ * @property {number} id - ID numérico único del usuario
+ * @property {string} node_id - ID global de GraphQL
+ * @property {string} avatar_url - URL de la imagen de perfil
+ * @property {string} gravatar_id - ID de Gravatar (generalmente vacío)
+ * @property {string} url - URL de la API REST para este usuario
+ * @property {string} html_url - URL del perfil público en GitHub.com
+ * @property {string} followers_url - URL de la API para obtener seguidores
+ * @property {string} following_url - URL de la API para obtener seguidos
+ * @property {string} gists_url - URL de la API para obtener gists
+ * @property {string} starred_url - URL de la API para obtener repos starred
+ * @property {string} subscriptions_url - URL de la API para obtener suscripciones
+ * @property {string} organizations_url - URL de la API para obtener organizaciones
+ * @property {string} repos_url - URL de la API para obtener repositorios
+ * @property {string} events_url - URL de la API para obtener eventos
+ * @property {string} received_events_url - URL de la API para eventos recibidos
+ * @property {string} type - Tipo de cuenta ('User' o 'Organization')
+ * @property {boolean} site_admin - true si es administrador de GitHub
+ * @property {string | null} name - Nombre completo del usuario (puede ser null)
+ * @property {string | null} company - Empresa donde trabaja (puede ser null)
+ * @property {string | null} blog - URL del blog o sitio web (puede ser null)
+ * @property {string | null} location - Ubicación geográfica (puede ser null)
+ * @property {string | null} email - Email público (puede ser null)
+ * @property {boolean | null} hireable - Disponible para contratación (puede ser null)
+ * @property {string | null} bio - Biografía del usuario (puede ser null)
+ * @property {string | null} twitter_username - Usuario de Twitter (puede ser null)
+ * @property {number} public_repos - Cantidad de repositorios públicos
+ * @property {number} public_gists - Cantidad de gists públicos
+ * @property {number} followers - Cantidad de seguidores
+ * @property {number} following - Cantidad de usuarios que sigue
+ * @property {string} created_at - Fecha de creación de la cuenta (ISO 8601)
+ * @property {string} updated_at - Fecha de última actualización del perfil (ISO 8601)
  */
 
 // Export an empty object for now, or specific validation functions later

@@ -1,11 +1,12 @@
-import { createContext } from 'react';
-import PropTypes from 'prop-types';
-import { useThemeLogic } from './useThemeLogic'; // Import the new hook
+import { createContext } from "react";
+import PropTypes from "prop-types";
+import { useThemeLogic } from "./useThemeLogic"; // Import the new hook
 
 /**
  * Context for managing the application's theme (light/dark mode).
  * Provides the current theme and a function to toggle it.
  */
+// eslint-disable-next-line react-refresh/only-export-components
 export const ThemeContext = createContext();
 
 /**
@@ -16,20 +17,18 @@ export const ThemeContext = createContext();
  * @returns {JSX.Element} A React context provider.
  */
 export const ThemeProvider = ({ children }) => {
-    const { theme, toggleTheme } = useThemeLogic(); // Use the new hook
+  const { theme, toggleTheme } = useThemeLogic(); // Use the new hook
 
-    const value = {
-        theme,
-        toggleTheme,
-    };
+  const value = {
+    theme,
+    toggleTheme,
+  };
 
-    return (
-        <ThemeContext.Provider value={value}>
-            {children}
-        </ThemeContext.Provider>
-    );
+  return (
+    <ThemeContext.Provider value={value}>{children}</ThemeContext.Provider>
+  );
 };
 
 ThemeProvider.propTypes = {
-    children: PropTypes.node.isRequired,
+  children: PropTypes.node.isRequired,
 };
