@@ -1,4 +1,4 @@
-import { Card, CardBody, Button } from "@/presentation/components/ui";
+import { Card, CardBody, Button } from "@/shared/components/ui";
 import { formatJoinDate } from "@/utils/formatters";
 import {
   FiUsers,

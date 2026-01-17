@@ -1,4 +1,4 @@
-import { Card, CardBody } from "@/presentation/components/ui";
+import { Card, CardBody } from "@/shared/components/ui";
 import { FiAlertTriangle } from "react-icons/fi";
 import PropTypes from "prop-types";
 

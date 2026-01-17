@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Button, Input } from "@/presentation/components/ui";
+import { Button, Input } from "@/shared/components/ui";
 import { FiSearch } from "react-icons/fi";
 import PropTypes from "prop-types";
 
