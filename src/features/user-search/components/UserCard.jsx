@@ -1,4 +1,4 @@
-import { Card, CardBody, Button } from "@/shared/components/ui";
+import { Card, CardBody, CardHeader, CardFooter, Button } from "@/shared/components/ui";
 import { formatJoinDate } from "@/shared/utils/formatters";
 import {
   FiUsers,
@@ -9,7 +9,17 @@ import {
 import PropTypes from "prop-types";
 
 /**
- * Minimalist user statistic display.
+ * @file Tarjeta de presentación para un usuario de GitHub.
+ * @description Muestra la información clave del perfil de un usuario, incluyendo avatar, estadísticas y un enlace a su perfil.
+ */
+
+/**
+ * Componente para mostrar una estadística individual del usuario (ej. Followers).
+ * @param {object} props - Propiedades del componente.
+ * @param {React.ElementType} props.icon - El icono a mostrar.
+ * @param {string} props.label - La etiqueta de la estadística.
+ * @param {number} props.value - El valor de la estadística.
+ * @returns {JSX.Element}
  */
 const UserStat = ({ icon: Icon, label, value }) => (
   <div className="flex flex-col items-center text-center">
@@ -30,7 +40,10 @@ UserStat.propTypes = {
 };
 
 /**
- * Minimalist GitHub user card.
+ * Componente principal de la tarjeta de usuario.
+ * @param {object} props - Propiedades del componente.
+ * @param {object} props.user - El objeto de usuario de GitHub.
+ * @returns {JSX.Element|null}
  */
 const UserCard = ({ user }) => {
   if (!user) {
@@ -53,34 +66,31 @@ const UserCard = ({ user }) => {
 
   return (
     <Card className="w-full max-w-md bg-white dark:bg-gray-800 transition-all duration-300 hover:shadow-lg hover:dark:shadow-blue-800/20">
-      <CardBody className="p-8">
-        {/* Avatar and Name */}
-        <div className="flex flex-col items-center mb-6 gap-2">
-          <img
-            src={avatar_url || ""}
-            alt={`Avatar de ${login}`}
-            className="w-24 h-24 rounded-full object-cover mb-3"
-          />
-          <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100">
-            {name || login}
-          </h2>
-          <p className="text-sm text-gray-500 dark:text-gray-400 mt-0.5">
-            @{login}
-          </p>
-          <p className="text-xs text-gray-400 dark:text-gray-500/70 mt-1">
-            Desde {joinDate}
-          </p>
-        </div>
-
-        {/* Bio */}
+      <CardHeader className="flex flex-col items-center text-center">
+        <img
+          src={avatar_url || ""}
+          alt={`Avatar de ${login}`}
+          className="w-24 h-24 rounded-full object-cover mb-3"
+        />
+        <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100">
+          {name || login}
+        </h2>
+        <p className="text-sm text-gray-500 dark:text-gray-400 mt-0.5">
+          @{login}
+        </p>
+        <p className="text-xs text-gray-400 dark:text-gray-500/70 mt-1">
+          Desde {joinDate}
+        </p>
+      </CardHeader>
+      
+      <CardBody>
         {bio && (
           <p className="text-center text-sm text-gray-600 dark:text-gray-300 mb-6 leading-relaxed">
             {bio}
           </p>
         )}
 
-        {/* Statistics */}
-        <div className="grid grid-cols-3 gap-4 py-4 border-y border-gray-200 dark:border-gray-700 mb-6">
+        <div className="grid grid-cols-3 gap-4">
           <UserStat
             icon={FiGitBranch}
             label="Repos"
@@ -93,9 +103,10 @@ const UserCard = ({ user }) => {
             value={following || 0}
           />
         </div>
+      </CardBody>
 
-        {/* GitHub Link */}
-        <a href={html_url} target="_blank" rel="noopener noreferrer">
+      <CardFooter>
+        <a href={html_url} target="_blank" rel="noopener noreferrer" className="w-full">
           <Button
             fullWidth
             variant="filled"
@@ -105,7 +116,7 @@ const UserCard = ({ user }) => {
             <FiExternalLink className="h-4 w-4" />
           </Button>
         </a>
-      </CardBody>
+      </CardFooter>
     </Card>
   );
 };

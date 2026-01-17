@@ -1,28 +1,27 @@
 import { useEffect } from "react";
-import { ErrorBoundary } from "@/shared/components/ui";
-import LoadingSpinner from "@/shared/components/ui/LoadingSpinner";
-import { useUserSearch } from "@/features/user-search/context/UserSearchContext";
-import SearchBar from "@/features/user-search/components/SearchBar";
-import UserCard from "@/features/user-search/components/UserCard";
-import ErrorDisplay from "@/features/user-search/components/ErrorDisplay";
+import { ErrorBoundary, LoadingSpinner } from "@/shared/components/ui";
+import { useUserSearch } from "@/features/user-search/context";
+import { SearchBar, UserCard, ErrorDisplay } from "@/features/user-search/components";
+import { FiGithub } from "react-icons/fi";
 
 /**
- * Renders the user search page, including the search bar, user card, and error display.
- * This component consumes the user search context to display the current state of the search.
- * @returns {JSX.Element} The user search page component.
+ * @file Página principal de búsqueda de usuarios.
+ * @description Orquesta los componentes de la feature de búsqueda y muestra los diferentes estados (carga, error, éxito, inicial).
+ * @returns {JSX.Element} La página de búsqueda de usuarios.
  */
 const UserSearchPage = () => {
   const { user, isLoading, error, searchUser } = useUserSearch();
 
-  // Cargar un usuario por defecto al iniciar la aplicación
+  const hasInitialState = !user && !isLoading && !error;
+
   useEffect(() => {
-    searchUser("slinkter");
-  }, [searchUser]);
+    // No longer loading a default user to show the initial state
+    // searchUser("slinkter");
+  }, []);
 
   return (
-    <main className="w-full max-w-3xl animate-fade-in ">
-      {/* Search Bar */}
-      <div className="mb-4 flex justify-center">
+    <main className="w-full max-w-5xl grid grid-rows-[auto,1fr] gap-8 animate-fade-in">
+      <div className="flex justify-center">
         <SearchBar
           onSearch={searchUser}
           isLoading={isLoading}
@@ -30,11 +29,9 @@ const UserSearchPage = () => {
         />
       </div>
 
-      {/* Content Area */}
-      <div className="min-h-[500px] flex justify-center items-start">
-        {/* Loading State */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         {isLoading && (
-          <div className="flex flex-col items-center justify-center pt-20 animate-fade-in">
+          <div className="col-span-full flex flex-col items-center justify-center pt-20 animate-fade-in">
             <LoadingSpinner size="w-16 h-16" color="text-blue-500" />
             <p className="mt-4 text-sm text-gray-500 dark:text-gray-400 animate-pulse">
               Buscando en la galaxia de GitHub...
@@ -42,16 +39,26 @@ const UserSearchPage = () => {
           </div>
         )}
 
-        {/* Error State */}
         {error && (
-          <div className="w-full animate-fade-in flex justify-center">
+          <div className="col-span-full flex justify-center">
             <ErrorDisplay error={error} />
           </div>
         )}
+        
+        {hasInitialState && (
+          <div className="col-span-full flex flex-col items-center justify-center text-center">
+            <FiGithub className="w-24 h-24 text-gray-300 dark:text-gray-700 mb-4" />
+            <h2 className="text-2xl font-bold text-gray-700 dark:text-gray-300">
+              Bienvenido a GitHub Explorer
+            </h2>
+            <p className="text-gray-500 dark:text-gray-400 mt-2">
+              Usa la barra de búsqueda para encontrar perfiles de desarrolladores.
+            </p>
+          </div>
+        )}
 
-        {/* Success State */}
-        {!isLoading && !error && user && (
-          <div className="w-full animate-fade-in flex justify-center">
+        {user && (
+          <div className="md:col-start-2 lg:col-start-2 flex justify-center">
             <ErrorBoundary>
               <UserCard user={user} />
             </ErrorBoundary>
