@@ -1,4 +1,5 @@
 import { createContext, useContext } from "react";
+import PropTypes from "prop-types";
 import { useGithubUser } from "@/features/user-search/hooks/useGithubUser";
 
 /**
@@ -31,6 +32,10 @@ export const UserSearchProvider = ({ children }) => {
       {children}
     </UserSearchContext.Provider>
   );
+};
+
+UserSearchProvider.propTypes = {
+  children: PropTypes.node.isRequired,
 };
 
 /**
