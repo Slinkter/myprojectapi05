@@ -4,7 +4,7 @@
 [![Vite](https://img.shields.io/badge/Vite-5.4-yellow?logo=vite)](https://vitejs.dev/)
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind-3.4-blueviolet?logo=tailwind-css)](https://tailwindcss.com/)
 
-Minimalist application to search and display GitHub profiles, built with Clean Architecture principles.
+Minimalist application to search and display GitHub profiles, built with a Feature-Based Architecture.
 
 ![Screenshot](./api05.jpeg)
 
@@ -53,17 +53,28 @@ For a more detailed breakdown of the UI/UX improvements, see the [UX/UI Analysis
 
 ## 🏗️ Architecture
 
-This project follows the principles of **Clean Architecture**, separating concerns into distinct layers. This makes the codebase modular, scalable, and easy to maintain.
+This project now follows a **Feature-Based Architecture**. This approach organizes code by distinct functionalities, making it modular, scalable, and easy to maintain as the application grows.
 
 ```
 src/
-├── presentation/     # UI Layer (React Components, Hooks, Pages)
-├── application/      # Application Layer (Use Cases)
-├── domain/           # Domain Layer (Entities, Business Rules)
-└── infrastructure/   # Infrastructure Layer (API Services, External Libraries)
+├── features/        # Contains code grouped by specific features
+│   └── user-search/ # All components, hooks, logic, and services for user search
+│       ├── application/
+│       ├── components/
+│       ├── context/
+│       ├── hooks/
+│       ├── pages/
+│       └── services/
+└── shared/          # Contains reusable components, utilities, and common logic
+    ├── components/
+    │   └── ui/      # UI primitives (buttons, cards, etc.)
+    │   └── ThemeToggle.jsx
+    ├── context/
+    ├── domain/
+    └── utils/
 ```
 
-For a more detailed explanation of the architecture and design patterns used, see the [Final Analysis](./src/docs/FINAL_ANALYSIS.md).
+This structure enhances developer experience by co-locating all code relevant to a feature, improving navigability and reducing cognitive load.
 
 ---
 
@@ -98,7 +109,7 @@ See [DOCUMENTATION.md](./src/docs/DOCUMENTATION.md) for complete documentation.
 
 ---
 
-## 🤝 Contributing
+## 🤝 Contribuir
 
 1. Fork the project
 2. Create your feature branch
@@ -108,7 +119,7 @@ See [DOCUMENTATION.md](./src/docs/DOCUMENTATION.md) for complete documentation.
 
 ---
 
-## 📄 License
+## 📄 Licencia
 
 MIT License - See [LICENSE](./LICENSE) for more details.
 
