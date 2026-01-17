@@ -1,5 +1,5 @@
-import { fetchUser } from "@/infrastructure/services/github";
-import { isValidGithubUsername } from "@/domain/github-user/rules";
+import { fetchUser } from "@/features/user-search/services/github";
+import { isValidGithubUsername } from "@/shared/domain/github-user/rules";
 
 /**
  * Use case for searching a GitHub user.

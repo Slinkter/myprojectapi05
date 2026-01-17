@@ -1,5 +1,5 @@
 import { useState, useCallback } from "react";
-import { searchUserUseCase } from "@/application/searchUser";
+import { searchUserUseCase } from "@/features/user-search/application/searchUser";
 
 /**
  * Custom hook for searching and managing GitHub users, focused on UI state management.

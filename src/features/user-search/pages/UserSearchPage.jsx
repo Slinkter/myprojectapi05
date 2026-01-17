@@ -1,10 +1,10 @@
 import { useEffect } from "react";
-import { ErrorBoundary } from "@/presentation/components/ui";
-import LoadingSpinner from "@/presentation/components/ui/LoadingSpinner";
-import { useUserSearch } from "@/presentation/context/UserSearchContext";
-import SearchBar from "@/presentation/components/user-search/SearchBar";
-import UserCard from "@/presentation/components/user-search/UserCard";
-import ErrorDisplay from "@/presentation/components/user-search/ErrorDisplay";
+import { ErrorBoundary } from "@/shared/components/ui";
+import LoadingSpinner from "@/shared/components/ui/LoadingSpinner";
+import { useUserSearch } from "@/features/user-search/context/UserSearchContext";
+import SearchBar from "@/features/user-search/components/SearchBar";
+import UserCard from "@/features/user-search/components/UserCard";
+import ErrorDisplay from "@/features/user-search/components/ErrorDisplay";
 
 /**
  * Renders the user search page, including the search bar, user card, and error display.

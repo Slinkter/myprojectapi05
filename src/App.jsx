@@ -1,5 +1,4 @@
-import UserSearchPage from "@/presentation/pages/UserSearchPage";
-import UserHeader from "./presentation/pages/UserHeader";
+import UserSearchPage from "@/features/user-search/pages/UserSearchPage";
 
 /**
  * Main application component.
@@ -8,7 +7,6 @@ import UserHeader from "./presentation/pages/UserHeader";
 const App = () => {
   return (
     <div className="min-h-dvh w-full bg-gray-200 dark:bg-gray-900 flex flex-col justify-center items-center p-4 sm:p-6 md:p-8 antialiased transition-colors duration-300">
-      <UserHeader />
       <UserSearchPage />
     </div>
   );

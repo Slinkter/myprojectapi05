@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Card, CardBody, Button } from "@/presentation/components/ui";
+import { Card, CardBody, Button } from "@/shared/components/ui";
 import { FiAlertTriangle, FiRefreshCw } from "react-icons/fi";
 
 /**

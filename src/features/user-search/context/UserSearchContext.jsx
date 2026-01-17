@@ -1,5 +1,5 @@
 import { createContext, useContext } from "react";
-import { useGithubUser } from "@/presentation/hooks/useGithubUser";
+import { useGithubUser } from "@/features/user-search/hooks/useGithubUser";
 
 /**
  * @typedef {object} UserSearchContextValue
