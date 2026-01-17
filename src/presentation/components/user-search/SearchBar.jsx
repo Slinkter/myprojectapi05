@@ -7,6 +7,7 @@ import PropTypes from "prop-types";
  * Minimalist search bar component for finding GitHub users.
  */
 const SearchBar = ({ onSearch, isLoading }) => {
+  /*  */
   const [searchText, setSearchText] = useState("");
   const [validationError, setValidationError] = useState(false);
 
@@ -33,7 +34,7 @@ const SearchBar = ({ onSearch, isLoading }) => {
   const isDisabled = isLoading;
 
   return (
-    <div className="relative w-full max-w-2xl">
+    <div className="relative w-full max-w-md ">
       <Input
         type="text"
         label="Buscar usuario de GitHub..."

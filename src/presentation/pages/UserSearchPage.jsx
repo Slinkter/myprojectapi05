@@ -20,9 +20,9 @@ const UserSearchPage = () => {
   }, [searchUser]);
 
   return (
-    <main className="w-full max-w-3xl animate-fade-in">
+    <main className="w-full max-w-3xl animate-fade-in ">
       {/* Search Bar */}
-      <div className="mb-12 flex justify-center">
+      <div className="mb-4 flex justify-center">
         <SearchBar
           onSearch={searchUser}
           isLoading={isLoading}

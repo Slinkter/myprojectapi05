@@ -21,9 +21,9 @@ import { searchUserUseCase } from "@/application/searchUser";
  * // await searchUser('react-developer');
  */
 export const useGithubUser = () => {
-  const [user, setUser] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
+  const [user, setUser] = useState(null);
 
   const searchUser = useCallback(async (username) => {
     setIsLoading(true);

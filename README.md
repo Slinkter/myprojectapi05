@@ -34,7 +34,20 @@ pnpm run deploy
 ✅ View full profile
 ✅ Automatic dark mode
 ✅ Responsive design
-✅ Smooth animations
+✅ Smooth animations and micro-interactions
+
+---
+
+## 🎨 UI/UX Enhancements
+
+This project focuses on providing a polished and modern user experience. Some of the key UI/UX features include:
+
+*   **Modern Loading Spinner:** A custom SVG spinner with smooth animations provides a better loading experience.
+*   **Engaging Error States:** Error messages are displayed in a user-friendly and visually appealing way, with clear icons and animations.
+*   **Interactive User Card:** The user card features subtle hover effects and a clean, hierarchical design to improve readability and engagement.
+*   **Fluid Animations:** The entire interface uses subtle animations and transitions to feel more alive and responsive.
+
+For a more detailed breakdown of the UI/UX improvements, see the [UX/UI Analysis](./src/docs/UX_UI_ANALYSIS.md).
 
 ---
 
