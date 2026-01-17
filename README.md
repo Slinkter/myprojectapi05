@@ -4,7 +4,7 @@
 [![Vite](https://img.shields.io/badge/Vite-5.4-yellow?logo=vite)](https://vitejs.dev/)
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind-3.4-blueviolet?logo=tailwind-css)](https://tailwindcss.com/)
 
-Aplicación minimalista para buscar y visualizar perfiles de GitHub.
+Minimalist application to search and display GitHub profiles, built with Clean Architecture principles.
 
 ![Screenshot](./api05.jpeg)
 
@@ -13,10 +13,10 @@ Aplicación minimalista para buscar y visualizar perfiles de GitHub.
 ## 🚀 Quick Start
 
 ```bash
-# Instalar dependencias
+# Install dependencies
 pnpm install
 
-# Desarrollo
+# Development
 pnpm run dev
 
 # Build
@@ -30,26 +30,27 @@ pnpm run deploy
 
 ## ✨ Features
 
-✅ Búsqueda de usuarios de GitHub  
-✅ Visualización de perfil completo  
-✅ Dark mode automático  
-✅ Diseño responsive  
-✅ Animaciones suaves  
+✅ Search for GitHub users
+✅ View full profile
+✅ Automatic dark mode
+✅ Responsive design
+✅ Smooth animations
 
 ---
 
-## 🏗️ Arquitectura
+## 🏗️ Architecture
 
-**Feature-Based Architecture** con Clean Code principles.
+This project follows the principles of **Clean Architecture**, separating concerns into distinct layers. This makes the codebase modular, scalable, and easy to maintain.
 
 ```
 src/
-├── features/user-search/    # Feature completa
-├── components/ui/           # Sistema de diseño
-├── context/                 # Estado global
-├── domain/                  # Lógica de negocio
-└── pages/                   # Orquestación
+├── presentation/     # UI Layer (React Components, Hooks, Pages)
+├── application/      # Application Layer (Use Cases)
+├── domain/           # Domain Layer (Entities, Business Rules)
+└── infrastructure/   # Infrastructure Layer (API Services, External Libraries)
 ```
+
+For a more detailed explanation of the architecture and design patterns used, see the [Final Analysis](./src/docs/FINAL_ANALYSIS.md).
 
 ---
 
@@ -58,45 +59,46 @@ src/
 - **React 18.3** - UI Library
 - **Vite 5.4** - Build Tool
 - **Tailwind CSS 3.4** - Styling
+- **React Context** - State Management
 - **Google Fonts** - Lora & Macondo
 - **React Icons** - Icons
 
 ---
 
-## 📚 Documentación
+## 📚 Documentation
 
-Ver [DOCUMENTATION.md](./src/docs/DOCUMENTATION.md) para documentación completa.
+See [DOCUMENTATION.md](./src/docs/DOCUMENTATION.md) for complete documentation.
 
-**Otros documentos:**
-- [Análisis Final](./src/docs/FINAL_ANALYSIS.md)
-- [Plan de Migración](./src/docs/MIGRATION_PLAN.md)
-- [Análisis UX/UI](./src/docs/UX_UI_ANALYSIS.md)
+**Other documents:**
+- [Final Analysis](./src/docs/FINAL_ANALYSIS.md)
+- [Migration Plan](./src/docs/MIGRATION_PLAN.md)
+- [UX/UI Analysis](./src/docs/UX_UI_ANALYSIS.md)
 
 ---
 
-## 📊 Métricas
+## 📊 Metrics
 
-- **Bundle JS**: 159 KB (51 KB gzip)
-- **Bundle CSS**: 15 KB (3.5 KB gzip)
+- **JS Bundle**: 159 KB (51 KB gzip)
+- **CSS Bundle**: 15 KB (3.5 KB gzip)
 - **Lighthouse**: 95+
-- **0 Errores** de ESLint
+- **0 ESLint Errors**
 
 ---
 
-## 🤝 Contribuir
+## 🤝 Contributing
 
-1. Fork el proyecto
-2. Crea tu feature branch
-3. Commit tus cambios
-4. Push a la branch
-5. Abre un Pull Request
-
----
-
-## 📄 Licencia
-
-MIT License - Ver [LICENSE](./LICENSE) para más detalles.
+1. Fork the project
+2. Create your feature branch
+3. Commit your changes
+4. Push to the branch
+5. Open a Pull Request
 
 ---
 
-**Desarrollado con ❤️ usando React + Vite + Tailwind CSS**
+## 📄 License
+
+MIT License - See [LICENSE](./LICENSE) for more details.
+
+---
+
+**Developed with ❤️ using React + Vite + Tailwind CSS**

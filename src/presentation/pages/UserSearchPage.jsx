@@ -1,18 +1,17 @@
 import { useEffect } from "react";
 import { Spinner, ErrorBoundary } from "@/presentation/components/ui";
-import { useGithubUser } from "@/presentation/hooks/useGithubUser";
+import { useUserSearch } from "@/presentation/context/UserSearchContext";
 import SearchBar from "@/presentation/components/user-search/SearchBar";
 import UserCard from "@/presentation/components/user-search/UserCard";
 import ErrorDisplay from "@/presentation/components/user-search/ErrorDisplay";
 
 /**
  * Renders the user search page, including the search bar, user card, and error display.
- * This component orchestrates the user search feature by using the `useGithubUser` hook.
- * Features smooth transitions and animations for better UX.
+ * This component consumes the user search context to display the current state of the search.
  * @returns {JSX.Element} The user search page component.
  */
 const UserSearchPage = () => {
-  const { user, isLoading, error, searchUser } = useGithubUser();
+  const { user, isLoading, error, searchUser } = useUserSearch();
 
   // Cargar un usuario por defecto al iniciar la aplicación
   useEffect(() => {
