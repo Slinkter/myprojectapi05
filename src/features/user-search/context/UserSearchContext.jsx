@@ -37,17 +37,17 @@ export const UserSearchContext = createContext(undefined);
  * @returns {JSX.Element} El componente Provider configurado
  */
 export const UserSearchProvider = ({ children }) => {
-  const userSearch = useGithubUser();
+    const userSearch = useGithubUser();
 
-  return (
-    <UserSearchContext.Provider value={userSearch}>
-      {children}
-    </UserSearchContext.Provider>
-  );
+    return (
+        <UserSearchContext.Provider value={userSearch}>
+            {children}
+        </UserSearchContext.Provider>
+    );
 };
 
 UserSearchProvider.propTypes = {
-  children: PropTypes.node.isRequired,
+    children: PropTypes.node.isRequired,
 };
 
 /**
@@ -64,9 +64,11 @@ UserSearchProvider.propTypes = {
  * @throws {Error} Si se usa fuera de un UserSearchProvider
  */
 export const useUserSearch = () => {
-  const context = useContext(UserSearchContext);
-  if (context === undefined) {
-    throw new Error("useUserSearch must be used within a UserSearchProvider");
-  }
-  return context;
+    const context = useContext(UserSearchContext);
+    if (context === undefined) {
+        throw new Error(
+            "useUserSearch must be used within a UserSearchProvider"
+        );
+    }
+    return context;
 };

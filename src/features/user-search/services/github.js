@@ -24,8 +24,8 @@ const API_BASE_URL = "https://api.github.com";
  *
  * **Códigos de estado manejados:**
  * - 200: Éxito - Retorna datos del usuario
- * - 404: Usuario no encontrado
  * - 403: Límite de rate limit excedido (60 req/hora sin auth)
+ * - 404: Usuario no encontrado
  * - Otros: Error genérico de la API
  *
  * **Rate Limiting:**
@@ -45,25 +45,27 @@ const API_BASE_URL = "https://api.github.com";
  * }
  */
 export const fetchUser = async (username) => {
-  if (!username) {
-    throw new Error("El nombre de usuario no puede estar vacío.");
-  }
+    if (!username) {
+        throw new Error("El nombre de usuario no puede estar vacío.");
+    }
 
-  const url = `${API_BASE_URL}/users/${username}`;
-  const response = await fetch(url);
+    const url = `${API_BASE_URL}/users/${username}`;
+    const response = await fetch(url);
 
-  if (response.status === 404) {
-    throw new Error("Usuario no encontrado.");
-  }
+    if (response.status === 404) {
+        throw new Error("Usuario no encontrado.");
+    }
 
-  if (response.status === 403) {
-    throw new Error("Límite de tasa de la API excedido. Inténtalo más tarde.");
-  }
+    if (response.status === 403) {
+        throw new Error(
+            "Límite de tasa de la API excedido. Inténtalo más tarde."
+        );
+    }
 
-  if (!response.ok) {
-    throw new Error(`Error en la API de GitHub: ${response.statusText}`);
-  }
+    if (!response.ok) {
+        throw new Error(`Error en la API de GitHub: ${response.statusText}`);
+    }
 
-  const data = await response.json();
-  return data;
+    const data = await response.json();
+    return data;
 };

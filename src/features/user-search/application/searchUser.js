@@ -18,9 +18,9 @@ import { fetchUser } from "@/features/user-search/services/github";
  * @throws {Error} Si el username es inválido o el usuario no existe
  */
 export const searchUserUseCase = async (username) => {
-  if (!isValidGithubUsername(username)) {
-    throw new Error("Invalid GitHub username.");
-  }
+    if (!isValidGithubUsername(username)) {
+        throw new Error("Invalid GitHub username.");
+    }
 
-  return await fetchUser(username);
+    return await fetchUser(username);
 };

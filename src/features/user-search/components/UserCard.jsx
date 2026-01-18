@@ -87,12 +87,13 @@ const UserCard = ({ user }) => {
   const joinDate = formatJoinDate(created_at);
 
   return (
-    <Card className="w-full max-w-md bg-white dark:bg-gray-800 transition-all duration-300 hover:shadow-lg hover:dark:shadow-blue-800/20">
-      <CardHeader className="flex flex-col items-center text-center">
+    <Card className="w-full max-w-md bg-white dark:bg-gray-800 transition-all duration-300 hover:shadow-lg hover:dark:shadow-blue-800/20 flex flex-col max-h-[calc(100vh-10rem)]">
+      <CardHeader className="flex flex-col items-center text-center flex-shrink-0">
         <img
           src={avatar_url || ""}
           alt={`Avatar de ${login}`}
           className="w-24 h-24 rounded-full object-cover mb-3"
+          loading="lazy"
         />
         <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100">
           {name || login}
@@ -105,7 +106,7 @@ const UserCard = ({ user }) => {
         </p>
       </CardHeader>
 
-      <CardBody>
+      <CardBody className="overflow-y-auto">
         {bio && (
           <p className="text-center text-sm text-gray-600 dark:text-gray-300 mb-6 leading-relaxed">
             {bio}
@@ -127,7 +128,7 @@ const UserCard = ({ user }) => {
         </div>
       </CardBody>
 
-      <CardFooter>
+      <CardFooter className="flex-shrink-0">
         <a
           href={html_url}
           target="_blank"

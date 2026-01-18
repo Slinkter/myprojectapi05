@@ -31,24 +31,24 @@ import { searchUserUseCase } from "@/features/user-search/application/searchUser
  * await searchUser('octocat');
  */
 export const useGithubUser = () => {
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState(null);
-  const [user, setUser] = useState(null);
+    const [isLoading, setIsLoading] = useState(false);
+    const [error, setError] = useState(null);
+    const [user, setUser] = useState(null);
 
-  const searchUser = useCallback(async (username) => {
-    setIsLoading(true);
-    setError(null);
-    setUser(null);
+    const searchUser = useCallback(async (username) => {
+        setIsLoading(true);
+        setError(null);
+        setUser(null);
 
-    try {
-      const userData = await searchUserUseCase(username);
-      setUser(userData);
-    } catch (e) {
-      setError(e.message);
-    } finally {
-      setIsLoading(false);
-    }
-  }, []);
+        try {
+            const userData = await searchUserUseCase(username);
+            setUser(userData);
+        } catch (e) {
+            setError(e.message);
+        } finally {
+            setIsLoading(false);
+        }
+    }, []);
 
-  return { user, isLoading, error, searchUser };
+    return { user, isLoading, error, searchUser };
 };

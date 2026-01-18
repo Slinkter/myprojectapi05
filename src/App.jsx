@@ -17,12 +17,11 @@ import { Header } from "@/shared/components";
  * @returns {JSX.Element} El componente raíz de la aplicación
  */
 const App = () => {
-  return (
-    <div className="min-h-screen w-full bg-gray-100 dark:bg-gray-900 grid grid-rows-[auto,1fr] justify-items-center p-4 sm:p-6 md:p-8 antialiased transition-colors duration-300">
-      <Header />
-      <UserSearchPage />
-    </div>
-  );
+    return (
+        <div className="min-h-screen w-full bg-gray-100 dark:bg-gray-900 flex flex-col justify-center items-center     p-4 sm:p-6 md:p-8 antialiased transition-colors duration-300">
+            <UserSearchPage />
+        </div>
+    );
 };
 
 export default App;
