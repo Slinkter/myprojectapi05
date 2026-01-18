@@ -1,6 +1,6 @@
 # 📙 Documento Técnico de Software: GitHub Explorer
 
-**Versión:** 1.0.0
+**Versión:** 1.1.0
 **Fecha:** 17 de Enero, 2026
 **Autor:** Senior Frontend Architect
 
@@ -33,6 +33,7 @@ El alcance actual del proyecto incluye las siguientes funcionalidades:
     *   Implementar una arquitectura frontend moderna, escalable y mantenible (Feature-Based Architecture).
     *   Asegurar una alta calidad de código con convenciones claras y documentación (JSDoc).
     *   Utilizar un stack tecnológico moderno y eficiente (React, Vite, Tailwind CSS).
+    *   Optimizar el rendimiento percibido a través de técnicas de carga perezosa y esqueletos de UI.
 *   **De Producto:**
     *   Ofrecer una experiencia de usuario (UX) fluida, intuitiva y agradable.
     *   Proporcionar una interfaz de usuario (UI) limpia, profesional y estéticamente cuidada.
@@ -50,7 +51,7 @@ El alcance actual del proyecto incluye las siguientes funcionalidades:
 | RF-002 | Visualización de Perfil | Tras una búsqueda exitosa, la aplicación debe mostrar la tarjeta de perfil del usuario encontrado. |
 | RF-003 | Visualización de Estadísticas | La tarjeta de perfil debe incluir el número de repositorios públicos, seguidores y seguidos. |
 | RF-004 | Enlace a GitHub | La tarjeta debe contener un botón o enlace que redirija al perfil completo en `github.com`. |
-| RF-005 | Estado de Carga | Mientras se realiza la búsqueda, la aplicación debe mostrar un indicador de carga. |
+| RF-005 | Estado de Carga | Mientras se realiza la búsqueda, la aplicación debe mostrar un esqueleto de UI (skeleton) que simula la tarjeta de perfil. |
 | RF-006 | Estado de Error | Si el usuario no se encuentra o la API falla, se debe mostrar un mensaje de error claro. |
 | RF-007 | Estado Inicial | Al abrir la aplicación, se debe mostrar un estado inicial que invite a la búsqueda. |
 | RF-008 | Tema Oscuro | La aplicación debe soportar un tema claro y uno oscuro, con un interruptor para cambiar entre ellos. |
@@ -59,9 +60,9 @@ El alcance actual del proyecto incluye las siguientes funcionalidades:
 
 | ID | Requerimiento | Descripción |
 |----|---------------|-------------|
-| RNF-001 | Performance | La aplicación debe cargar rápidamente y responder de forma fluida a las interacciones del usuario. First Contentful Paint (FCP) < 2s. |
+| RNF-001 | Performance | La aplicación debe cargar rápidamente y responder de forma fluida a las interacciones del usuario. First Contentful Paint (FCP) < 2s. Se utiliza lazy loading para componentes y imágenes. |
 | RNF-002 | Responsividad | La interfaz debe ser completamente funcional y visualmente correcta en los principales tamaños de pantalla (móvil, tablet, desktop). |
-| RNF-003 | Calidad de Código | El código debe seguir las guías de estilo, estar bien documentado y ser fácil de mantener. |
+| RNF-003 | Calidad de Código | El código debe seguir las guías de estilo, estar bien documentado, ser fácil de mantener y seguir principios de Separación de Responsabilidades. |
 | RNF-004 | Escalabilidad | La arquitectura debe permitir agregar nuevas funcionalidades (features) en el futuro con un impacto mínimo en el código existente. |
 | RNF-005 | Compatibilidad | La aplicación debe ser compatible con las últimas dos versiones de los navegadores modernos (Chrome, Firefox, Safari, Edge). |
 
@@ -81,16 +82,25 @@ El proyecto sigue una **Arquitectura Basada en Features (Feature-Based Architect
 
 Esta estructura promueve la modularidad y facilita el desarrollo, ya que todo el código relacionado con una feature está co-localizado.
 
-### 3.2. Diseño de la Interfaz (UI/UX)
+### 3.2. Refactorización y Separación de Responsabilidades
+
+Recientemente, se ha refactorizado la `UserSearchPage` para mejorar la legibilidad y la separación de responsabilidades. La lógica de renderizado condicional para los resultados de búsqueda se ha extraído a un nuevo componente: `UserSearchResult`.
+
+*   **`UserSearchPage`:** Su responsabilidad principal ahora es orquestar la búsqueda, manejar el estado a través del hook `useUserSearch` y pasar los datos al componente de presentación.
+*   **`UserSearchResult`:** Es un componente puramente presentacional que se encarga de decidir qué mostrar en función de las props que recibe (`isLoading`, `error`, `user`).
+
+Este cambio hace que el código sea más limpio, mantenible y sigue el principio de Contenedor/Presentacional.
+
+### 3.3. Diseño de la Interfaz (UI/UX)
 
 El diseño se basa en principios minimalistas, buscando la claridad y la facilidad de uso.
 
 *   **Paleta de Colores:** Se utiliza una paleta de grises neutros para los temas claro y oscuro, con un color de acento (azul) para las interacciones principales.
-*   **Tipografía:** Se usan las fuentes `Lora` y `Macondo` para dar una identidad visual única y mejorar la legibilidad.
+*   **Layout:** Se utiliza CSS Grid y Flexbox para la estructura principal, asegurando un layout consistente, alineado y responsivo. La `UserCard` y la `SearchBar` comparten el mismo ancho máximo para una mayor coherencia visual.
+*   **Gestión de Scroll:** Para evitar el scroll a nivel de página, la `UserCard` tiene una altura máxima y su cuerpo es internamente scrollable si el contenido (como una biografía larga) excede el espacio.
 *   **Micro-interacciones:** Se emplean animaciones sutiles (hover, fade-in, etc.) para proporcionar feedback al usuario y hacer que la interfaz se sienta más viva y receptiva.
-*   **Layout:** Se utiliza CSS Grid para la estructura principal, asegurando un layout consistente y responsivo.
 
-### 3.3. Flujo de Datos
+### 3.4. Flujo de Datos
 
 El flujo de datos es unidireccional, siguiendo el patrón de React:
 
@@ -100,7 +110,7 @@ El flujo de datos es unidireccional, siguiendo el patrón de React:
 4.  **Caso de Uso:** El hook invoca un caso de uso (`searchUserUseCase`).
 5.  **Servicio:** El caso de uso llama al servicio (`fetchUser`) que realiza la petición a la API externa.
 6.  **Actualización de Estado:** El resultado de la API se propaga hacia arriba, actualizando el estado en el hook.
-7.  **Re-renderizado:** React re-renderiza los componentes suscritos al contexto con la nueva información.
+7.  **Re-renderizado:** React re-renderiza los componentes suscritos. `UserSearchPage` pasa el nuevo estado a `UserSearchResult`, que se encarga de mostrar la UI correspondiente.
 
 ---
 
@@ -118,7 +128,12 @@ El flujo de datos es unidireccional, siguiendo el patrón de React:
 
 Los componentes se dividen en dos categorías:
 
-*   **Componentes de Feature (`src/features/.../components`):** Específicos de una funcionalidad y no reutilizables fuera de ella.
+*   **Componentes de Feature (`src/features/.../components`):** Específicos de una funcionalidad.
+    *   `SearchBar`: Barra de búsqueda.
+    *   `UserCard`: Tarjeta de perfil de usuario.
+    *   `UserCardSkeleton`: Esqueleto de carga para la tarjeta.
+    *   `ErrorDisplay`: Componente para mostrar errores.
+    *   `UserSearchResult`: Componente que orquesta la visualización de los resultados.
 *   **Componentes Compartidos (`src/shared/components`):** Componentes genéricos y de UI (como `Button`, `Card`) que pueden ser usados en cualquier parte de la aplicación.
 
 ### 4.3. Manejo de Estado
@@ -127,6 +142,14 @@ El estado se gestiona con una combinación de `useState` local y `React Context`
 
 *   **`ThemeContext`:** Gestiona el estado del tema (claro/oscuro) en toda la aplicación.
 *   **`UserSearchContext`:** Gestiona el estado de la búsqueda de usuarios (`user`, `isLoading`, `error`), haciéndolo accesible a todos los componentes de la feature.
+
+### 4.4. Optimizaciones de Rendimiento
+
+Para garantizar una experiencia de usuario fluida, se han implementado las siguientes optimizaciones:
+
+*   **Lazy Loading de Componentes:** El componente `UserCard`, que es relativamente grande, se carga de forma perezosa usando `React.lazy` y `Suspense`. Esto significa que el código del componente no se descarga hasta que es necesario mostrarlo, reduciendo el tamaño del bundle inicial.
+*   **Skeleton Loading:** Durante la carga de datos del usuario, se muestra un componente `UserCardSkeleton`. Este esqueleto visual imita la estructura de la `UserCard`, lo que reduce el Layout Shift (CLS) y mejora la percepción de velocidad por parte del usuario.
+*   **Lazy Loading de Imágenes:** El avatar del usuario en la `UserCard` utiliza el atributo nativo `loading="lazy"`, que difiere la carga de la imagen hasta que está a punto de entrar en el viewport.
 
 ---
 

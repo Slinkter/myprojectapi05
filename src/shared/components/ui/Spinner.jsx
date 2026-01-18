@@ -1,12 +1,21 @@
 import PropTypes from "prop-types";
 
 /**
- * Custom Spinner component using pure Tailwind CSS.
- * @param {object} props - Component props
- * @param {string} props.size - Spinner size: 'sm' | 'md' | 'lg'
- * @param {string} props.color - Spinner color: 'blue' | 'gray' | 'white'
- * @param {string} props.className - Additional CSS classes
- * @returns {JSX.Element}
+ * Componente de Spinner reutilizable para indicar estados de carga.
+ *
+ * **Funcionalidad:**
+ * - Provee un indicador de carga visualmente atractivo.
+ * - Construido con Tailwind CSS y animaciones CSS.
+ * - Soporta diferentes tamaños y colores.
+ *
+ * @param {object} props
+ * @param {'sm'|'md'|'lg'} [props.size='md'] - Tamaño del spinner.
+ * @param {'blue'|'gray'|'white'} [props.color='blue'] - Color del spinner.
+ * @param {string} [props.className=''] - Clases adicionales de Tailwind.
+ * @returns {JSX.Element} El componente del spinner.
+ *
+ * @example
+ * <Spinner size="lg" color="blue" />
  */
 const Spinner = ({ size = "md", color = "blue", className = "" }) => {
   const sizes = {
@@ -25,7 +34,7 @@ const Spinner = ({ size = "md", color = "blue", className = "" }) => {
     <div
       className={`${sizes[size]} border-4 border-t-transparent ${colors[color]} rounded-full animate-spin ${className}`}
       role="status"
-      aria-label="Loading"
+      aria-label="Cargando"
     />
   );
 };

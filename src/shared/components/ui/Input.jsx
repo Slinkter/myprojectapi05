@@ -1,8 +1,32 @@
 import PropTypes from "prop-types";
 
 /**
- * Custom Input component using pure Tailwind CSS.
- * Minimalist design with clean aesthetics.
+ * Componente de Input reutilizable con un diseño minimalista y limpio.
+ *
+ * **Funcionalidad:**
+ * - Provee un campo de texto estilizado con Tailwind CSS.
+ * - Soporta estados de error y deshabilitado.
+ * - El `label` se utiliza como `placeholder`.
+ *
+ * **Flujo de renderizado:**
+ * - Combina clases base con estilos condicionales para los estados de error y deshabilitado.
+ * - Envuelve el input en un `div` contenedor para permitir estilización adicional a través de `containerProps`.
+ *
+ * @param {object} props
+ * @param {string} props.label - El texto a mostrar como placeholder.
+ * @param {boolean} [props.error=false] - Si el input está en estado de error.
+ * @param {boolean} [props.disabled=false] - Si el input está deshabilitado.
+ * @param {string} [props.className=''] - Clases adicionales de Tailwind para el elemento `input`.
+ * @param {object} [props.containerProps={}] - Props para el `div` contenedor, útil para añadir clases.
+ * @returns {JSX.Element} Elemento input estilizado.
+ *
+ * @example
+ * <Input
+ *   label="Nombre de usuario"
+ *   value={username}
+ *   onChange={(e) => setUsername(e.target.value)}
+ *   error={hasError}
+ * />
  */
 const Input = ({
   label,

@@ -6,3 +6,4 @@ export { default as SearchBar } from './SearchBar';
 export { default as UserCard } from './UserCard';
 export { default as ErrorDisplay } from './ErrorDisplay';
 export { default as UserCardSkeleton } from './UserCardSkeleton';
+export { default as UserSearchResult } from './UserSearchResult';
