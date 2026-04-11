@@ -22,5 +22,5 @@ export const searchUserUseCase = async (username) => {
         throw new Error("Invalid GitHub username.");
     }
 
-    return await fetchUser(username);
+    return fetchUser(username);
 };

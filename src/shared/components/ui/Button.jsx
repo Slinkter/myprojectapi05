@@ -31,7 +31,7 @@ const Button = ({
   ...props
 }) => {
   const baseStyles =
-    "font-medium rounded-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2";
+    "font-medium rounded-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 active:scale-95";
 
   const variants = {
     filled:

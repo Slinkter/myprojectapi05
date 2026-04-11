@@ -1,4 +1,4 @@
-import { createContext, useContext } from "react";
+import { createContext, useContext, useMemo } from "react";
 import PropTypes from "prop-types";
 import { useGithubUser } from "@/features/user-search/hooks/useGithubUser";
 
@@ -26,21 +26,29 @@ export const UserSearchContext = createContext(undefined);
  *
  * **Funcionalidad:**
  * - Inicializa el hook de lógica de negocio useGithubUser
- * - Inyecta el estado y las funciones resultantes en el árbol de componentes
+ * - Inyecta el estado y las funciones resultantes en el árbol de componentes memoizados
  *
  * **Flujo de inicialización:**
- * 1. Ejecuta useGithubUser() para obtener la instancia del servicio
- * 2. Renderiza los hijos envueltos en el Provider con el valor obtenido
+ * 1. Obtiene el estado del hook useGithubUser.
+ * 2. Memoiza el valor del contexto para evitar re-renders innecesarios en consumidores.
+ * 3. Renderiza los hijos envueltos en el Provider.
  *
  * @param {object} props
  * @param {React.ReactNode} props.children - Los componentes hijos que tendrán acceso al contexto
  * @returns {JSX.Element} El componente Provider configurado
  */
 export const UserSearchProvider = ({ children }) => {
-    const userSearch = useGithubUser();
+    const { user, isLoading, error, searchUser } = useGithubUser();
+
+    const value = useMemo(() => ({
+        user,
+        isLoading,
+        error,
+        searchUser
+    }), [user, isLoading, error, searchUser]);
 
     return (
-        <UserSearchContext.Provider value={userSearch}>
+        <UserSearchContext.Provider value={value}>
             {children}
         </UserSearchContext.Provider>
     );

@@ -1,71 +1,63 @@
-/**
- * @file Servicio para interactuar con la API pública de GitHub.
- * Proporciona funciones para obtener información de usuarios.
- */
+import { GithubUserSchema } from "@/shared/domain/github-user/models";
 
+/** 
+ * Constante inmutable en el scope del módulo (Module Scope).
+ * @type {string} 
+ */
 const API_BASE_URL = "https://api.github.com";
 
 /**
- * Obtiene los datos del perfil de un usuario de GitHub.
+ * Obtiene los datos del perfil de un usuario de GitHub con validación de esquema Zod.
  *
- * **Funcionalidad:**
- * - Realiza una petición HTTP GET a la API pública de GitHub
- * - Valida la entrada (username) antes de la petición
- * - Normaliza las respuestas de error (404, 403, etc.) en excepciones controladas
+ * **OPTIMIZACIONES APLICADAS:**
+ * 1. **Schema Validation (Zod):** Asegura que los datos sigan el contrato GithubUser.
+ * 2. **Data Pruning (O(K)):** El parseo de Zod extrae solo los campos declarados.
  *
- * **Flujo de ejecución:**
- * 1. Verifica si el username es válido
- * 2. Construye la URL del endpoint
- * 3. Ejecuta fetch() y espera la respuesta
- * 4. Evalúa el status code para lanzar errores específicos o parsear el JSON
- *
- * **Efectos secundarios:**
- * - Realiza una solicitud de red externa (Network Request)
- *
- * **Códigos de estado manejados:**
- * - 200: Éxito - Retorna datos del usuario
- * - 403: Límite de rate limit excedido (60 req/hora sin auth)
- * - 404: Usuario no encontrado
- * - Otros: Error genérico de la API
- *
- * **Rate Limiting:**
- * - Sin autenticación: 60 requests por hora
- * - Con token: 5000 requests por hora
- *
- * @param {string} username - Nombre de usuario de GitHub (ej: 'octocat')
- * @returns {Promise<object>} Promesa que resuelve con los datos del perfil del usuario
- * @throws {Error} Si el username está vacío, el usuario no existe (404) o hay error de red
- *
- * @example
- * try {
- *   const user = await fetchUser('octocat');
- *   console.log(user.name); // "The Octocat"
- * } catch (error) {
- *   console.error(error.message); // "Usuario no encontrado."
- * }
+ * @param {string} username - Nombre de usuario de GitHub.
+ * @returns {Promise<import("@/shared/domain/github-user/models").GithubUser>} Datos validados.
+ * @throws {Error} Si el esquema es inválido o el usuario no existe.
  */
 export const fetchUser = async (username) => {
-    if (!username) {
+    // Fail Fast: Validación O(1)
+    if (!username?.trim()) {
         throw new Error("El nombre de usuario no puede estar vacío.");
     }
 
     const url = `${API_BASE_URL}/users/${username}`;
-    const response = await fetch(url);
+    
+    try {
+        const response = await fetch(url);
 
-    if (response.status === 404) {
-        throw new Error("Usuario no encontrado.");
+        if (response.status === 404) {
+            throw new Error("Usuario no encontrado.");
+        }
+        
+        if (response.status === 403) {
+            throw new Error("Límite de tasa de la API excedido. Inténtalo más tarde.");
+        }
+        
+        if (!response.ok) {
+            throw new Error(`Error en la API de GitHub: ${response.statusText}`);
+        }
+
+        /** 
+         * Parsing y Validación Inmediata.
+         */
+        const data = await response.json();
+        
+        // Validación y Mapeo en un solo paso (O(K))
+        return GithubUserSchema.parse(data);
+
+    } catch (error) {
+        if (error.name === 'ZodError') {
+            console.error("Schema Mismatch:", error.errors);
+            throw new Error("Error en el formato de los datos recibidos de GitHub.");
+        }
+        
+        // Blindaje de errores de red
+        if (error.name === 'TypeError') {
+            throw new Error("Error de conexión. Verifica tu internet.");
+        }
+        throw error;
     }
-
-    if (response.status === 403) {
-        throw new Error(
-            "Límite de tasa de la API excedido. Inténtalo más tarde."
-        );
-    }
-
-    if (!response.ok) {
-        throw new Error(`Error en la API de GitHub: ${response.statusText}`);
-    }
-
-    const data = await response.json();
-    return data;
 };

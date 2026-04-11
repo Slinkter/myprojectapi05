@@ -147,6 +147,9 @@ El estado se gestiona con una combinación de `useState` local y `React Context`
 
 Para garantizar una experiencia de usuario fluida, se han implementado las siguientes optimizaciones:
 
+*   **Context Memoization:** El `UserSearchProvider` utiliza `useMemo` para estabilizar el objeto de estado global. Esto previene que todos los consumidores (como `SearchBar`) se re-rendericen cuando solo una propiedad del estado cambia.
+*   **Component Memoization:** El componente `SearchBar` ha sido envuelto en `React.memo` para evitar re-renderizados innecesarios, asegurando que solo se actualice si sus props (`isLoading`, `hasError`, `onSearch`) cambian realmente.
+*   **Aesthetic Feedback (Aura):** Se ha implementado feedback táctil en componentes base como `Button` mediante el efecto `active:scale-95`, mejorando la percepción de reactividad visual.
 *   **Lazy Loading de Componentes:** El componente `UserCard`, que es relativamente grande, se carga de forma perezosa usando `React.lazy` y `Suspense`. Esto significa que el código del componente no se descarga hasta que es necesario mostrarlo, reduciendo el tamaño del bundle inicial.
 *   **Skeleton Loading:** Durante la carga de datos del usuario, se muestra un componente `UserCardSkeleton`. Este esqueleto visual imita la estructura de la `UserCard`, lo que reduce el Layout Shift (CLS) y mejora la percepción de velocidad por parte del usuario.
 *   **Lazy Loading de Imágenes:** El avatar del usuario en la `UserCard` utiliza el atributo nativo `loading="lazy"`, que difiere la carga de la imagen hasta que está a punto de entrar en el viewport.

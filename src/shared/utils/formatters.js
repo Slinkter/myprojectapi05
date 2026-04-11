@@ -1,4 +1,14 @@
 /**
+ * Formateador de fecha pre-instanciado para optimizar el rendimiento.
+ * Evita la creación recurrente de objetos Intl.DateTimeFormat (O(1) en ejecución).
+ */
+const dateFormatter = new Intl.DateTimeFormat("es-ES", {
+  day: "numeric",
+  month: "long",
+  year: "numeric",
+});
+
+/**
  * Formatea una fecha ISO 8601 a un formato legible en español.
  *
  * **Funcionalidad:**
@@ -32,9 +42,5 @@ export const formatJoinDate = (isoDateString) => {
     return "Fecha inválida";
   }
 
-  return date.toLocaleDateString("es-ES", {
-    day: "numeric",
-    month: "long",
-    year: "numeric",
-  });
+  return dateFormatter.format(date);
 };

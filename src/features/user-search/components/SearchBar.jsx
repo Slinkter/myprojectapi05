@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, memo } from "react";
 import { Button, Input } from "@/shared/components/ui";
 import { FiSearch } from "react-icons/fi";
 import PropTypes from "prop-types";
@@ -8,7 +8,7 @@ import PropTypes from "prop-types";
  *
  * **Funcionalidad:**
  * - Captura la entrada del usuario para buscar perfiles de GitHub
- * - Maneja validaciones locales (campo vacío)
+ * - Maneja validaciones locales (campo vacío) e integra errores globales del API
  * - Gestiona el estado de carga visualmente (deshabilita inputs)
  *
  * **Flujo de interacción:**
@@ -17,15 +17,15 @@ import PropTypes from "prop-types";
  * 3. Si es válido, se invoca `onSearch` padre; si no, muestra error visual
  *
  * **Efectos secundarios:**
- * - Limpia el estado de error automáticamente cuando el usuario vuelve a escribir
+ * - Limpia el estado de error local automáticamente cuando el usuario vuelve a escribir
  *
  * @param {object} props
  * @param {function} props.onSearch - Callback para ejecutar la búsqueda
  * @param {boolean} props.isLoading - Estado de carga para deshabilitar controles
+ * @param {boolean} props.hasError - Estado de error global (ej: usuario no encontrado)
  * @returns {JSX.Element} El componente de barra de búsqueda
  */
-const SearchBar = ({ onSearch, isLoading }) => {
-  /*  */
+const SearchBar = memo(({ onSearch, isLoading, hasError }) => {
   const [searchText, setSearchText] = useState("");
   const [validationError, setValidationError] = useState(false);
 
@@ -50,9 +50,10 @@ const SearchBar = ({ onSearch, isLoading }) => {
   };
 
   const isDisabled = isLoading;
+  const showInputError = validationError || hasError;
 
   return (
-    <div className="relative w-full max-w-md ">
+    <div className="relative w-full max-w-md">
       <Input
         type="text"
         label="Buscar usuario de GitHub..."
@@ -63,7 +64,7 @@ const SearchBar = ({ onSearch, isLoading }) => {
         containerProps={{
           className: `${validationError ? "animate-shake" : ""}`,
         }}
-        error={validationError}
+        error={showInputError}
         disabled={isDisabled}
       />
       <Button
@@ -76,7 +77,9 @@ const SearchBar = ({ onSearch, isLoading }) => {
       </Button>
     </div>
   );
-};
+});
+
+SearchBar.displayName = "SearchBar";
 
 SearchBar.propTypes = {
   onSearch: PropTypes.func.isRequired,
