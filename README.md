@@ -41,22 +41,23 @@ src/
 Toda la documentación técnica está estructurada jerárquicamente para facilitar su consulta y mantenimiento.
 
 ### **[1.0] Estrategia y Visión**
-- **[1.1] [Documento Técnico](./src/docs/TECHNICAL_DOCUMENT.md)**: El SSOT de arquitectura, stack y flujo de datos.
-- **[1.2] [Casos de Uso](./src/docs/USE_CASES.md)**: Requerimientos funcionales desde la perspectiva del usuario.
-- **[1.3] [Glosario](./src/docs/GLOSSARY.md)**: Terminología técnica y de dominio.
+- **[1.1] [Documento Técnico](./src/docs/1.1-TECHNICAL_DOCUMENT.md)**: El SSOT de arquitectura, stack y flujo de datos.
+- **[1.2] [Casos de Uso](./src/docs/1.2-USE_CASES.md)**: Requerimientos funcionales desde la perspectiva del usuario.
+- **[1.3] [Glosario](./src/docs/1.3-GLOSSARY.md)**: Terminología técnica y de dominio.
 
 ### **[2.0] Diseño y UI (Aura Standards)**
-- **[2.1] [Análisis UX/UI](./src/docs/UX_UI_ANALYSIS.md)**: Detalles sobre el tema "Midnight", paleta Zinc-950 y tipografía Inter.
-- **[2.2] [Diagramas de Arquitectura](./src/docs/DIAGRAMS.md)**: Representación visual del flujo asíncrono y componentes.
+- **[2.1] [Análisis UX/UI](./src/docs/2.1-UX_UI_ANALYSIS.md)**: Detalles sobre el tema "Midnight", paleta Zinc-950 y tipografía Inter.
+- **[2.2] [Diagramas de Arquitectura](./src/docs/2.2-DIAGRAMS.md)**: Representación visual del flujo asíncrono y componentes.
 
 ### **[3.0] Desarrollo e Implementación**
-- **[3.1] [Ejemplos y Guías](./src/docs/EXAMPLES.md)**: Fragmentos de código para extender la funcionalidad.
-- **[3.2] [Estándares JSDoc](./src/docs/JSDOC_IMPROVEMENTS.md)**: Convenciones de documentación interna.
+- **[3.1] [Ejemplos y Guías](./src/docs/3.1-EXAMPLES.md)**: Fragmentos de código para extender la funcionalidad.
+- **[3.2] [Estándares JSDoc](./src/docs/3.2-JSDOC_IMPROVEMENTS.md)**: Convenciones de documentación interna.
 
 ### **[4.0] Mantenimiento y Ciclo de Vida**
-- **[4.1] [Plan de Limpieza](./src/docs/CLEANUP_PLAN.md)**: Estrategia de gestión de deuda técnica.
-- **[4.2] [Hoja de Ruta de Migración](./src/docs/MIGRATION_PLAN.md)**: Planificación de actualizaciones tecnológicas.
-- **[4.3] [Análisis Final](./src/docs/FINAL_ANALYSIS.md)**: Informe sobre la madurez y calidad del software.
+- **[4.1] [Hoja de Ruta de Migración](./src/docs/4.1-MIGRATION_PLAN.md)**: Planificación de actualizaciones tecnológicas.
+- **[4.2] [Plan de Limpieza](./src/docs/4.2-CLEANUP_PLAN.md)**: Estrategia de gestión de deuda técnica.
+- **[4.3] [Análisis Post-Migración](./src/docs/4.3-POST_MIGRATION_ANALYSIS.md)**: Evaluación de resultados tras cambios estructurales.
+- **[4.4] [Análisis Final](./src/docs/4.4-FINAL_ANALYSIS.md)**: Informe sobre la madurez y calidad del software.
 
 ---
 

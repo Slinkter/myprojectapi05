@@ -40,12 +40,15 @@ export const UserSearchContext = createContext(undefined);
 export const UserSearchProvider = ({ children }) => {
     const { user, isLoading, error, searchUser } = useGithubUser();
 
-    const value = useMemo(() => ({
-        user,
-        isLoading,
-        error,
-        searchUser
-    }), [user, isLoading, error, searchUser]);
+    const value = useMemo(
+        () => ({
+            user,
+            isLoading,
+            error,
+            searchUser,
+        }),
+        [user, isLoading, error, searchUser],
+    );
 
     return (
         <UserSearchContext.Provider value={value}>
@@ -75,7 +78,7 @@ export const useUserSearch = () => {
     const context = useContext(UserSearchContext);
     if (context === undefined) {
         throw new Error(
-            "useUserSearch must be used within a UserSearchProvider"
+            "useUserSearch must be used within a UserSearchProvider",
         );
     }
     return context;

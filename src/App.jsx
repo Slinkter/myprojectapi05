@@ -19,7 +19,7 @@ const App = () => {
             {/* Decorative Background Elements */}
             <div className="absolute top-0 -left-4 w-72 h-72 bg-blue-500/10 dark:bg-blue-500/5 rounded-full blur-[120px] pointer-events-none" />
             <div className="absolute bottom-0 -right-4 w-96 h-96 bg-purple-500/10 dark:bg-purple-500/5 rounded-full blur-[120px] pointer-events-none" />
-            
+
             <UserSearchPage />
         </div>
     );
