@@ -1,0 +1,44 @@
+Flujo de Datos: GitHub Explorer
+
+[Usuario]
+   |
+   | (1) Inicia Búsqueda
+   v
+[SearchBar.jsx]
+   |
+   | (2) onSearch(username)
+   v
+[UserSearchPage.jsx]
+   |
+   | (3) searchUser(username)
+   v
+[UserSearchContext.jsx]
+   |
+   | (4) Invoca Hook
+   v
+[useGithubUser.js]
+   |
+   | (5) Invoca Caso de Uso
+   v
+[searchUserUseCase.js]
+   |
+   | (6) Llama Servicio API
+   v
+[github.js (Service)]
+   |
+   | (7) Petición GET
+   +-----> [GitHub API]
+   |          |
+   | (8) JSON |
+   +----------+
+   |
+   | (9) Devuelve Datos (Validados por Zod)
+   v
+[UserSearchPage.jsx]
+   |
+   | (10) Renderiza
+   +-----> [UserSearchResult.jsx]
+   |          |
+   |          +---> [UserCard.jsx] (Perfil)
+   |          +---> [UserCardSkeleton.jsx] (Carga)
+   |          +---> [ErrorDisplay.jsx] (Error)
