@@ -15,7 +15,11 @@ import { UserSearchPage } from "@/features/user-search/pages";
  */
 const App = () => {
     return (
-        <div className="min-h-screen w-full bg-gray-100 dark:bg-gray-900 flex flex-col justify-center items-center p-4 sm:p-6 md:p-8 antialiased transition-colors duration-300">
+        <div className="min-h-screen w-full bg-slate-50 dark:bg-zinc-950 flex flex-col justify-center items-center p-4 sm:p-6 md:p-8 antialiased transition-colors duration-500 overflow-hidden relative">
+            {/* Decorative Background Elements */}
+            <div className="absolute top-0 -left-4 w-72 h-72 bg-blue-500/10 dark:bg-blue-500/5 rounded-full blur-[120px] pointer-events-none" />
+            <div className="absolute bottom-0 -right-4 w-96 h-96 bg-purple-500/10 dark:bg-purple-500/5 rounded-full blur-[120px] pointer-events-none" />
+            
             <UserSearchPage />
         </div>
     );

@@ -3,125 +3,68 @@
 [![React](https://img.shields.io/badge/React-18.3-blue?logo=react)](https://reactjs.org/)
 [![Vite](https://img.shields.io/badge/Vite-5.4-yellow?logo=vite)](https://vitejs.dev/)
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind-3.4-blueviolet?logo=tailwind-css)](https://tailwindcss.com/)
-[![Arquitectura](https://img.shields.io/badge/Arquitectura-Basada_en_Features-green)](src/docs/TECHNICAL_DOCUMENT.md#31-arquitectura-del-software)
+[![Zod](https://img.shields.io/badge/Validation-Zod-8b5cf6)](https://zod.dev/)
 
-**GitHub Explorer** es una aplicación web moderna (SPA) construida para buscar y visualizar perfiles de desarrolladores de GitHub con una interfaz limpia, rápida y responsiva.
-
-![Screenshot](./api05.jpeg)
+**GitHub Explorer** es una plataforma de ingeniería frontend diseñada para la búsqueda y visualización de perfiles de desarrolladores con una experiencia cinemática y un motor de datos blindado.
 
 ---
 
-## 🌟 Principales Características
+## I. 🚀 Quick Start
 
-*   **Búsqueda Rápida de Usuarios:** Encuentra perfiles de GitHub al instante.
-*   **Tarjeta de Perfil Detallada:** Visualiza información clave como avatar, estadísticas y biografía.
-*   **Tema Oscuro y Claro:** Interfaz adaptable a las preferencias del usuario.
-*   **Diseño Responsivo:** Experiencia de usuario óptima en cualquier dispositivo.
-*   **Animaciones y Micro-interacciones:** Una interfaz fluida y agradable.
+### Pre-requisitos
+- Node.js v18+
+- pnpm
 
----
-
-## 🛠️ Stack Tecnológico
-
-| Área | Tecnología | Propósito |
-|---|---|---|
-| **UI** | [React](https://reactjs.org/) 18.3 | Construcción de la interfaz de usuario. |
-| **Build Tool** | [Vite](https://vitejs.dev/) 5.4 | Entorno de desarrollo y empaquetado ultra rápido. |
-| **Estilos** | [Tailwind CSS](https://tailwindcss.com/) 3.4 | Framework CSS Utility-First para un diseño rápido. |
-| **Estado Global** | React Context | Manejo de estado de la aplicación (tema, búsqueda). |
-| **Iconos** | [React Icons](https://react-icons.github.io/react-icons/) | Biblioteca de iconos populares. |
-| **Gestor de Paquetes** | [pnpm](https://pnpm.io/) | Gestor de paquetes rápido y eficiente. |
-
----
-
-## 🏗️ Arquitectura
-
-Este proyecto implementa una **Arquitectura Basada en Features (Feature-Based Architecture)**, que organiza el código en módulos funcionales y desacoplados.
-
+### Instalación y Ejecución
+```bash
+pnpm install
+pnpm run dev
 ```
+La aplicación se iniciará en `http://localhost:5173`.
+
+---
+
+## II. 🏗️ Arquitectura Core
+
+El proyecto implementa una **Arquitectura Basada en Features**, optimizada para la separación de responsabilidades y escalabilidad modular.
+
+```text
 src/
-├── features/        # Módulos de funcionalidades (ej. user-search)
-└── shared/          # Código reutilizable (componentes de UI, hooks, utils)
+├── features/        # Módulos funcionales (Vertical Slices)
+└── shared/          # Infraestructura, UI Atómica y Dominio
 ```
 
-Este enfoque mejora la escalabilidad y facilita el mantenimiento. Para una explicación detallada, consulta el **[Documento Técnico de Software](src/docs/TECHNICAL_DOCUMENT.md)**.
+---
+
+## III. 📂 Explorador de Ingeniería (Índice Maestro)
+
+Toda la documentación técnica está estructurada jerárquicamente para facilitar su consulta y mantenimiento.
+
+### **[1.0] Estrategia y Visión**
+- **[1.1] [Documento Técnico](./src/docs/TECHNICAL_DOCUMENT.md)**: El SSOT de arquitectura, stack y flujo de datos.
+- **[1.2] [Casos de Uso](./src/docs/USE_CASES.md)**: Requerimientos funcionales desde la perspectiva del usuario.
+- **[1.3] [Glosario](./src/docs/GLOSSARY.md)**: Terminología técnica y de dominio.
+
+### **[2.0] Diseño y UI (Aura Standards)**
+- **[2.1] [Análisis UX/UI](./src/docs/UX_UI_ANALYSIS.md)**: Detalles sobre el tema "Midnight", paleta Zinc-950 y tipografía Inter.
+- **[2.2] [Diagramas de Arquitectura](./src/docs/DIAGRAMS.md)**: Representación visual del flujo asíncrono y componentes.
+
+### **[3.0] Desarrollo e Implementación**
+- **[3.1] [Ejemplos y Guías](./src/docs/EXAMPLES.md)**: Fragmentos de código para extender la funcionalidad.
+- **[3.2] [Estándares JSDoc](./src/docs/JSDOC_IMPROVEMENTS.md)**: Convenciones de documentación interna.
+
+### **[4.0] Mantenimiento y Ciclo de Vida**
+- **[4.1] [Plan de Limpieza](./src/docs/CLEANUP_PLAN.md)**: Estrategia de gestión de deuda técnica.
+- **[4.2] [Hoja de Ruta de Migración](./src/docs/MIGRATION_PLAN.md)**: Planificación de actualizaciones tecnológicas.
+- **[4.3] [Análisis Final](./src/docs/FINAL_ANALYSIS.md)**: Informe sobre la madurez y calidad del software.
 
 ---
 
-## 📚 Documentación Completa
-
-Toda la documentación del proyecto se encuentra en la carpeta `src/docs/`.
-
-| Documento | Descripción |
-|---|---|
-| 📙 **[Documento Técnico](src/docs/TECHNICAL_DOCUMENT.md)** | La guía central que describe la arquitectura, diseño y stack. |
-| 📕 **[Casos de Uso](src/docs/USE_CASES.md)** | Describe las funcionalidades desde la perspectiva del usuario. |
-| 📗 **[Glosario de Términos](src/docs/GLOSSARY.md)** | Define los conceptos y tecnologías clave del proyecto. |
-| 📓 **[Ejemplos y Ejercicios](src/docs/EXAMPLES.md)** | Guías prácticas para entender y extender el código. |
-| 📐 **[Diagramas de Arquitectura](src/docs/DIAGRAMS.md)** | Diagramas de flujo y arquitectura en formato Mermaid. |
+## IV. 🤖 IA & Context
+Para agentes de IA y colaboradores, consultar:
+- **[GEMINI.md](./GEMINI.md)**: Contexto operacional y mandatos de ingeniería.
+- **[prompt.md](./prompt.md)**: Protocolo de activación del escuadrón especializado.
 
 ---
 
-## 🚀 Cómo Empezar
-
-Sigue estos pasos para ejecutar el proyecto en tu entorno local.
-
-### **Pre-requisitos**
-Asegúrate de tener [Node.js](https://nodejs.org/) (versión 18 o superior) y [pnpm](https://pnpm.io/installation) instalados.
-
-### **Instalación**
-
-1.  Clona el repositorio:
-    ```bash
-    git clone https://github.com/tu-usuario/myprojectapi05.git
-    ```
-2.  Navega al directorio del proyecto:
-    ```bash
-    cd myprojectapi05
-    ```
-3.  Instala las dependencias:
-    ```bash
-    pnpm install
-    ```
-
-### **Ejecución**
-
-*   **Modo Desarrollo:**
-    ```bash
-    pnpm run dev
-    ```
-    La aplicación estará disponible en `http://localhost:5173`.
-
-*   **Build para Producción:**
-    ```bash
-    pnpm run build
-    ```
-    Los archivos optimizados se generarán en la carpeta `dist/`.
-
-*   **Linting:**
-    ```bash
-    pnpm run lint
-    ```
-    Ejecuta ESLint para analizar el código en busca de problemas.
-
----
-
-## 🤝 Contribuciones
-
-Las contribuciones son bienvenidas. Por favor, sigue estos pasos:
-
-1.  Haz un Fork del proyecto.
-2.  Crea una nueva rama (`git checkout -b feature/nueva-funcionalidad`).
-3.  Realiza tus cambios y haz commit (`git commit -m 'Añade nueva funcionalidad'`).
-4.  Haz push a tu rama (`git push origin feature/nueva-funcionalidad`).
-5.  Abre un Pull Request.
-
----
-
-## 📄 Licencia
-
-Este proyecto está bajo la Licencia MIT. Consulta el archivo `LICENSE` para más detalles.
-
----
-
-**Desarrollado con ❤️ y las mejores prácticas de Frontend.**
+**Desarrollado con ❤️ bajo los estándares de Senior Frontend Architecture.**
