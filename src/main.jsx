@@ -6,6 +6,7 @@ import { ThemeProvider } from "@/shared/context";
 import { UserSearchProvider } from "@/features/user-search/context";
 import { ErrorBoundary } from "@/shared/components/ui";
 import { ThemeToggle } from "@/shared/components";
+import { Toaster } from "sonner";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
@@ -15,6 +16,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
           <App />
         </UserSearchProvider>
         <ThemeToggle />
+        <Toaster position="top-right" richColors closeButton />
       </ThemeProvider>
     </ErrorBoundary>
   </React.StrictMode>
