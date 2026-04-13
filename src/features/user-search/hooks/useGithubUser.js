@@ -33,7 +33,7 @@ export const useGithubUser = () => {
         } catch (e) {
             setError(e.message);
             toast.error(e.message, {
-              description: "Ocurrió un problema durante la búsqueda.",
+                description: "Ocurrió un problema durante la búsqueda.",
             });
         } finally {
             setIsLoading(false);
