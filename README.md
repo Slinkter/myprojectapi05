@@ -1,73 +1,69 @@
-# 🚀 GitHub Explorer
+# 🔍 GitHub Profiler & Interactive Cards
 
-[![React](https://img.shields.io/badge/React-18.3-blue?logo=react)](https://reactjs.org/)
-[![Vite](https://img.shields.io/badge/Vite-5.4-yellow?logo=vite)](https://vitejs.dev/)
-[![Tailwind CSS](https://img.shields.io/badge/Tailwind-3.4-blueviolet?logo=tailwind-css)](https://tailwindcss.com/)
-[![Zod](https://img.shields.io/badge/Validation-Zod-8b5cf6)](https://zod.dev/)
+[![React](https://img.shields.io/badge/React-18.3-61DAFB?style=flat&logo=react)](https://react.dev)
+[![Vite](https://img.shields.io/badge/Vite-5.4-646CFF?style=flat&logo=vite)](https://vitejs.dev)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind-3.4-06B6D4?style=flat&logo=tailwindcss)](https://tailwindcss.com)
+[![Zod](https://img.shields.io/badge/Validation-Zod-3E67B1?style=flat&logo=zod)](https://zod.dev)
+[![Framer Motion](https://img.shields.io/badge/Framer_Motion-12.0-0055FF?style=flat&logo=framer)](https://www.framer.com/motion)
+[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 
-**GitHub Explorer** es una plataforma de ingeniería frontend diseñada para la búsqueda y visualización de perfiles de desarrolladores con una experiencia cinemática y un motor de datos blindado.
+Plataforma frontend para la búsqueda, inspección y visualización cinemática de desarrolladores en GitHub, diseñada con una arquitectura resiliente y tipado estricto en tiempo de ejecución.
 
 ---
 
-## I. 🚀 Quick Start
+## 🎯 Características Principales
 
-### Pre-requisitos
-- Node.js v18+
-- pnpm
+- **Búsqueda Instantánea de Desarrolladores**: Acceso al perfil completo mediante nombre de usuario de GitHub.
+- **Tarjetas Cinemáticas Interactivas**: Tarjetas con efectos de hover, profundidad y microinteracciones fluidas.
+- **Contratos de Datos Blindados con Zod**: Validación estricta que previene fallos de renderizado ante respuestas inesperadas.
+- **Notificaciones con Sonner**: Sistema de toast no intrusivo para alertas de límite de tasa y errores de red.
+- **Modo Offline & Resiliencia**: Degradación elegante ante perfiles inexistentes o rate limits.
+
+---
+
+## 🛠️ Stack Tecnológico
+
+| Tecnología | Rol |
+| :--- | :--- |
+| **React 18.3** | Componentes funcionales y ciclo de vida |
+| **Vite 5.4** | Bundler ultrarrápido |
+| **Tailwind CSS 3.4** | Estilizado declarativo y diseño responsivo |
+| **Zod** | Validación y tipado estricto en runtime |
+| **Framer Motion** | Animaciones de física y transiciones de interfaz |
+| **Sonner** | Sistema moderno y accesible de notificaciones toast |
+
+---
+
+## 🚀 Inicio Rápido
+
+### Requisitos Previos
+- **Node.js**: v18.0 o superior
+- **pnpm**: v9.0 o superior
 
 ### Instalación y Ejecución
-```bash
-pnpm install
-pnpm run dev
-```
-La aplicación se iniciará en `http://localhost:5173`.
+
+1. **Instalar dependencias:**
+   ```bash
+   pnpm install
+   ```
+
+2. **Configurar variables de entorno:**
+   ```bash
+   cp .env.example .env
+   ```
+
+3. **Iniciar en desarrollo:**
+   ```bash
+   pnpm run dev
+   ```
+
+4. **Compilar para producción:**
+   ```bash
+   pnpm run build
+   ```
 
 ---
 
-## II. 🏗️ Core Architecture
+## 📄 Licencia
 
-El proyecto implementa una **Arquitectura Basada en Features**, optimizada para la separación de responsabilidades y escalabilidad modular.
-
-```text
-src/
-├── features/        # Módulos funcionales (Vertical Slices)
-└── shared/          # Infraestructura, UI Atómica y Dominio
-```
-
----
-
-## III. 📂 Engineering Explorer (Índice Maestro)
-
-Toda la documentación técnica está estructurada jerárquicamente para facilitar su consulta y mantenimiento.
-
-### **[1.0] Specifications**
-- **[1.1] Documento Técnico Maestro:** [TECHNICAL_DOCUMENT.md](./src/docs/1.1-TECHNICAL_DOCUMENT.md)
-- **[1.2] Casos de Uso del Usuario:** [USE_CASES.md](./src/docs/1.2-USE_CASES.md)
-- **[1.3] Glosario de Términos:** [GLOSSARY.md](./src/docs/1.3-GLOSSARY.md)
-
-### **[2.0] Design and UI**
-- **[2.1] Análisis de UX/UI:** [UX_UI_ANALYSIS.md](./src/docs/2.1-UX_UI_ANALYSIS.md)
-- **[2.2] Diagramas de Flujo:** [DIAGRAMS.md](./src/docs/2.2-DIAGRAMS.md)
-
-### **[3.0] Development Guides**
-- **[3.1] Guía de Ejemplos y Patrones:** [EXAMPLES.md](./src/docs/3.1-EXAMPLES.md)
-- **[3.2] Estándares JSDoc y Clean Code:** [JSDoc_IMPROVEMENTS.md](./src/docs/3.2-JSDOC_IMPROVEMENTS.md)
-- **[3.x] Prompt Documentation:** [prompt-doc.md](./src/docs/prompt-doc.md)
-
-### **[4.0] Lifecycle**
-- **[4.1] Hoja de Ruta de Migración:** [MIGRATION_PLAN.md](./src/docs/4.1-MIGRATION_PLAN.md)
-- **[4.2] Plan de Limpieza de Deuda Técnica:** [CLEANUP_PLAN.md](./src/docs/4.2-CLEANUP_PLAN.md)
-- **[4.3] Análisis Post-Migración:** [POST_MIGRATION_ANALYSIS.md](./src/docs/4.3-POST_MIGRATION_ANALYSIS.md)
-- **[4.4] Análisis de Madurez Final:** [FINAL_ANALYSIS.md](./src/docs/4.4-FINAL_ANALYSIS.md)
-
----
-
-## IV. 🤖 IA Context
-
-Para agentes de IA y colaboradores, consultar:
-- **[GEMINI.md](./GEMINI.md)**: Contexto operacional y mandatos de ingeniería.
-- **[prompt.md](./prompt.md)**: Protocolo de activación del escuadrón especializado.
-
----
-
-**Desarrollado con ❤️ bajo los estándares de Senior Frontend Architecture.**
+Este proyecto está bajo la Licencia **MIT**. Consulta el archivo `LICENSE` para más información.
